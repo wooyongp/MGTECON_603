@@ -1,0 +1,14 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.venv
+.DS_Store
+ECON 270(Amir)/
+slides/
+papers/
+
+PS1/*
+!PS1/PS1.tex
+!PS1/references.bib
+!PS1/output/

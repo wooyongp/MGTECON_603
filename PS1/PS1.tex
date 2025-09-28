@@ -1,0 +1,288 @@
+
+\documentclass[11pt]{article}
+\PassOptionsToPackage{svgnames}{xcolor}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumerate, fancyhdr, color, verbatim, setspace, multirow, multicol,subcaption, booktabs, caption, amsfonts}
+\usepackage{rotating}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{listings}
+\numberwithin{equation}{section}
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{corollary}{Corollary}[subsection]
+
+\usepackage{colortbl}
+\usepackage{tikz}
+\usetikzlibrary{matrix, positioning, shadings, shadows}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage[shortlabels]{enumitem}
+% \usepackage[symbol]{footmisc}
+\usepackage{multirow}
+\usepackage{multicol}
+% Creates the header and footer. You can adjust the look and feel of these here.
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\newcommand{\bp}{\mathbb{P}}
+
+\definecolor{lightgray}{RGB}{230, 230, 230}
+\definecolor{lightgrey}{RGB}{200, 200, 200}
+
+\usepackage{tcolorbox}
+\newenvironment{myblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgray,colframe=black,%
+    colbacklower=lightgrey,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\tcbuselibrary{skins,breakable}
+
+
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+% \renewcommand{\theenumi}{\alph{enumi}}
+\onehalfspacing
+
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\usepackage[backend=biber, style=authoryear, maxcitenames=2, maxbibnames=9]{biblatex}
+\DeclareDelimFormat{nameyeardelim}{\addcomma\space}
+\addbibresource{references.bib}
+
+\setcounter{tocdepth}{2}
+
+\title{MGTECON 603 - Problem Set 1\\ \small{(Instructor: Guido Imbens)}}
+\author{Wooyong Park\\Collaborators: Cem Kozanoglu, Roberto Gonzalez Tellez}
+\date{\today}
+
+\begin{document}
+
+
+\maketitle
+
+\section{Part I}
+
+\subsection*{Descriptive Statistics}
+
+The summary statistics of the data are shown in tables \ref{tab:summary_stats}, \ref{tab:summary_stats(control_group)}, and \ref{tab:summary_stats(treated_group)} in the appendix.
+
+The histogram of the outcome variable \verb|earnings1yr| (Figure \ref{fig:hist_earnings1yr}) displays a heavily zero-inflated distribution, and overall we have more treated units than control units.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{output/histogram_earnings1yr_by_treatment_arm.png}
+    \caption{\label{fig:hist_earnings1yr}Histogram of earnings1yr by treatment arm}
+\end{figure}
+
+
+
+
+
+\subsection*{(a) Difference-in-Means}
+
+Assuming our data is not a random sample but the population itself, the number $M$ given in the problem must be the actual number treated in our dataset, which is 4,383. 
+I create 99, 999, 9999, and 99999 random draws of treatment assignments with exactly 4,383 treated units to create the same number of test statistics that would be comparable to the actual test statistic.
+ – In principle, I must have $\binom{n}{M}$ possible treatment assignments, but since this number is extremely large, I will only create at maximum 99,999 random draws, assuming that it is a large enough number so that the difference of the exact population p-value and the p-value that I have from the 99,999 random draws is negligible –
+The reason I have multiple number of draws is to see if the p-value changes significantly. If I see histograms and p-values converging at some point, we might not need to increase the numbers of draws.
+
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{output/histograms_difference_in_means.png}
+    \caption{\label{fig:dim}Difference-in-means by number of draws}
+\end{figure}
+
+
+Figure \ref{fig:dim} shows that the histograms of the test statistics under the null hypothesis of no treatment effect, generated from different numbers of random draws outside the actual draw we have. 
+The red dashed line indicates the actual test statistic calculated from the observed data. 
+Here, we can see that even 999 draws seem to be enough to get a reasonable approximation of the null distribution, and the p-value does not change much as we increase the number of draws. 
+I remain trying different number of draws for problem I-(b) and (c) as well; however, if I had to choose a number, 999 seems to be sufficient.
+The actual test statistic is 1.1362, and the p-value under 999 draws is 0.0000.\footnote{The p-values for each test statistic and number of draws are in table \ref{tab:p_values_all_draws}.}
+
+
+\subsection*{(b) Difference-in-Medians}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{output/histograms_difference_in_medians.png}
+    \caption{\label{fig:dim}Difference-in-medians by number of draws}
+\end{figure}
+
+With the difference-in-medians, we obtain the actual test statistic 0.019 and the p-value 0.017 under 999 draws(table \ref{tab:p_values_all_draws}).
+This might not be the ideal test statistic to use, given that we have many zeros in the data(\verb|earnings1yr| has 52\% zeros).
+\textcite{chen2024logs} explains how we can separate the treatment effects at the extensive margin and the intensive margin when the outcome is a weakly positive random variable, and \textcite{feng_comparison_2021} compares zero-inflated count models and hurdle models.
+In this case, if the treatment does not strongly affect the extensive margin, the median of the two groups will not capture the treatment effect under a zero-inflated distribution.
+To account for the zero-inflated nature of the data and the distinction between the extensive and intensive margins, we can use a hurdle model, which is demonstrated in the next section.
+
+
+\subsection*{(c) Hurdle Estimates}
+
+As for another statistic that we can use, we can use a hurdle model to account for the zero-inflated nature of the data.
+The model I consider is as follows:
+
+\begin{align}
+P(Y_i > 0| W_i) &= \frac{1}{1+exp(-(\beta_0 + \beta_1 W_i + \beta_2 X_i + \beta_3 W_i \tilde{X}_i))} \label{eq:hurdle_prob}\\
+\mathbb{E}\left[\log(Y_i)| W_i\right] &= \gamma_0 + \gamma_1 W_i + \gamma_2 X_i + \gamma_3 W_i \tilde{X}_i \label{eq:hurdle_mean}
+\end{align}
+
+where $\tilde{X}_i$ is the vector of demeaned covariates(high school diploma, female, age, single) excluding the treatment variable $W_i$.
+Here, I allow the heterogeneity in the treatment effect by the observed covariates, and the covariates for the interaction term are demeaned so that $\beta_1$ and $\gamma_1$ capture the treatment effect for the individual with average characteristics.
+
+The test statistic I consider from equations \ref{eq:hurdle_prob} and \ref{eq:hurdle_mean} is as follows:
+
+\begin{align}
+\hat{T} = \beta_1 + \gamma_1 \label{eq:hurdle}
+\end{align}
+
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth, height=8cm]{output/histograms_hurdle_model_estimate.png}
+    \caption{\label{fig:hurdle}Hurdle model estimate by number of draws}
+\end{figure}
+
+Figure \ref{fig:hurdle} shows that the histograms of \ref{eq:hurdle} under the null hypothesis of no treatment effect, generated from different numbers of random draws outside the actual draw we have. 
+The red dashed line indicates the actual test statistic calculated from the observed data. 
+The actual test statistic is 0.8470, and the p-value under 999 draws is 0.0000(table \ref{tab:p_values_all_draws}).
+
+\subsection*{(d) Bernoulli Process}
+
+
+Figure \ref{fig:bernoulli} shows the histograms of the three test statistics(mean, median, and hurdle) under the null hypothesis of no treatment effect from 999 draws, assuming a coin toss experiment with $p=0.2$.
+The red dashed line indicates the actual test statistic calculated from the observed data. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth, height=5cm]{output/histograms_bernoulli.png}
+    \caption{\label{fig:bernoulli}Bernoulli process}
+\end{figure}
+
+
+The p-values under 999 draws for all three test statistics are in table \ref{tab:p_values_bernoulli}, compared to the permutation p-values in the previous sections.
+In this case, we have smaller p-values for the median statistic in the coin toss case. However, we cannot compare 
+the other p-values directly since they are all zero. I believe the p-values of these two approaches can be very different if we have a large imbalance in the treatment and control groups or if the number of observations is small.
+The reasons are discussed in Part \ref{sec:part_ii}.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{lcc}
+        \toprule
+        Test Statistic & Bernoulli & Permutation \\
+        \midrule
+        Mean & 0.0000 & 0.0000 \\
+        Median & 0.0140 & 0.0170 \\
+        Hurdle & 0.0000 & 0.0000 \\
+        \bottomrule
+    \end{tabular}
+    \caption{\label{tab:p_values_bernoulli}P-values of the test statistics under different approaches(999 draws)}
+\end{table}
+
+
+\section{Part II}
+\label{sec:part_ii}
+\subsection*{(a) Theoretical Calculations}
+
+In the current situation, with 49 treatment units and 51 control units, it is better to consider the permutation of the treatment status rather than considering the Bernoulli process that the experiment design actually followed.
+This is not a universal rule, but in this case, since we have a balanced treatment and control groups, it is more appropriate to consider the permutation of the treatment status.
+Assuming we use the usual test statistics such as difference-in-means or difference-in-medians, their variances usually increase with the imbalance of the treatment assignment.
+If we were to consider the Bernoulli process, we also consider the test statistics under imbalanced treatment and control groups, and the specific values of these statistics will be more affected by the noise.
+In other words, we will have more test statistics since we are considering $2^{100}$ possible treatment assignments instead of $\binom{100}{49}$ possible treatment assignments, but the extra test statistics will not have the same noise-to-signal ratio as the statistics under balanced treatment assignment.
+However, if we limit to the case where we have 49 and 51 treated and control units, the variance of the test statistics are less likely to be affected by the noise.
+Therefore, we should consider the permutation of the treatment status in this case.
+
+\input{output/2asimulations.tex}
+
+
+Table \ref{tab:2asimulations} presents the p-values of the test statistics under the null hypothesis of no treatment effect based on the two different approaches: permutation and Bernoulli.
+The DGP of this simulated data is as follows:
+
+\begin{verbatim}
+    Y0 <- rnorm(100, mean=50, sd=10)
+    Y1 <- 1.1*Y0 + rnorm(100, mean=0, sd=1)
+\end{verbatim}
+
+where $Y_i(1)$ and $Y_i(0)$ are the potential outcomes for the $i$-th unit under the treatment and control scenarios, respectively.
+
+We see that the p-values of the test statistics under the null hypothesis of no treatment effect are very close to each other, regardless of the number of random draws.
+
+
+However, consider the situation where we ended up with 30 treated units and 70 control units.
+
+
+In this case, our test statistic will be more likely to be affected by the noise.
+Therefore, we should consider the Bernoulli process in this case.
+Table \ref{tab:2asimulations(imbalanced)} is from the same DGP of the potential outcomes and Bernoulli process with $p=0.5$, but with 30 treated units and 70 control units.
+That is, 
+
+\begin{verbatim}
+    Y0 <- rnorm(100, mean=50, sd=10)
+    Y1 <- 1.1*Y0 + rnorm(100, mean=0, sd=1)
+    W <- c(repeat(1, 30), repeat(0, 70))
+    W <- shuffle(W)
+    
+    for (i in 1:num_simulations) {
+        Wmock <- rbinom(100, 1, 0.5)  # random assignment with p=0.5
+        diff_in_means <- mean(data$Y_obs[Wmock == 1]) -mean(data$Y_obs[Wmock == 0])
+        test_statistics <- c(test_statistics, diff_in_means)
+        }
+    \end{verbatim}
+    
+    
+\input{output/2asimulations(imbalanced).tex}
+
+In table \ref{tab:2asimulations(imbalanced)}, we see that the p-values of the test statistics under the null hypothesis of no treatment effect are significantly lower when we consider the Bernoulli process.
+Therefore, it is better to consider the Bernoulli process when the resulted imbalance in treatment and control groups is large.
+
+
+\appendix
+\setcounter{figure}{0}                      
+\setcounter{table}{0}                      
+\renewcommand\thefigure{A.\arabic{figure}} 
+\renewcommand\thetable{A.\arabic{table}} 
+
+\begin{sidewaystable}[h]
+    \centering
+    \tiny
+    \input{output/summary_stats.tex}
+    \caption{\label{tab:summary_stats}Summary Statistics}
+\end{sidewaystable}
+
+
+\begin{sidewaystable}[h]
+    \centering
+    \tiny
+    \input{output/summary_stats(control_group).tex}
+    \caption{\label{tab:summary_stats(control_group)}Summary Statistics}
+\end{sidewaystable}
+
+
+\begin{sidewaystable}[h]
+    \centering
+    \tiny
+    \input{output/summary_stats(treated_group).tex}
+    \caption{\label{tab:summary_stats(treated_group)}Summary Statistics}
+\end{sidewaystable}
+
+
+\input{output/p-values_all_draws.tex}
+
+
+\printbibliography
+
+\end{document}
