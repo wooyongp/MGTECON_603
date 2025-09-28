@@ -67,7 +67,7 @@
 \setcounter{tocdepth}{2}
 
 \title{MGTECON 603 - Problem Set 1\\ \small{(Instructor: Guido Imbens)}}
-\author{Wooyong Park\\Collaborators: Cem Kozanoglu, Roberto Gonzalez Tellez}
+\author{Wooyong Park\\ {\small Collaborators: Cem Kozanoglu, Roberto Gonzalez Tellez, Hanniel Ho, Aileen Wu}}
 \date{\today}
 
 \begin{document}
@@ -159,7 +159,7 @@ The test statistic I consider from equations \ref{eq:hurdle_prob} and \ref{eq:hu
 
 Figure \ref{fig:hurdle} shows that the histograms of \ref{eq:hurdle} under the null hypothesis of no treatment effect, generated from different numbers of random draws outside the actual draw we have. 
 The red dashed line indicates the actual test statistic calculated from the observed data. 
-The actual test statistic is 0.8470, and the p-value under 999 draws is 0.0000(table \ref{tab:p_values_all_draws}).
+The actual test statistic is 0.8470, and the p-value under 999 draws is 0.0000(table \ref{tab:p_values_all_draws}).\footnote{One thing to note is that the distribution of the outliers in the median statistic is opposite to the previous median statistic under permutation. This is because although we have roughly 80\% of actual treated units, we assumed in this problem that 20\% are treated. However, the p-values are unaffected because it is the imbalance in the treatment and control groups that determines them, not the actual treated-to-control ratio.}
 
 \subsection*{(d) Bernoulli Process}
 
