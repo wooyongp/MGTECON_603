@@ -1,0 +1,124 @@
+
+\documentclass{article}
+\PassOptionsToPackage{svgnames}{xcolor}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumerate, fancyhdr, color, verbatim, setspace, multirow, multicol,subcaption, booktabs, caption, amsfonts}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\numberwithin{equation}{subsection}
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{prop}{Proposition}[subsection]
+\newtheorem{corollary}{Corollary}[subsection]
+\newtheorem{exmp}{Example}[subsection]
+
+\usepackage{colortbl}
+\usepackage{hhline}
+\usepackage{tikz}
+\usetikzlibrary{matrix, positioning, shadings, shadows, shapes.geometric, arrows.meta}
+\usepackage[shortlabels]{enumitem}
+% \usepackage[symbol]{footmisc}
+\usepackage{multirow}
+\usepackage{multicol}
+% Creates the header and footer. You can adjust the look and feel of these here.
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\definecolor{lightgray}{RGB}{230, 230, 230}
+\definecolor{lightgrey}{RGB}{200, 200, 200}
+
+\usepackage{tcolorbox}
+\newenvironment{myblock}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=lightgray,colframe=black,%
+    colbacklower=lightgrey,%
+    title=#1]}%
+    {\endtcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\usepackage{enumitem}
+\setlist[itemize,2]{label=$\diamond$}
+
+
+\newcommand{\E}{{\mathbb{E}}}
+\newcommand{\Var}{{\mathbb{V}}}
+
+
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+% \renewcommand{\theenumi}{\alph{enumi}}
+\onehalfspacing
+
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
+\counterwithin{algorithm}{section}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\usepackage[backend=biber, style=authoryear, maxcitenames=2, maxbibnames=9]{biblatex}
+\DeclareDelimFormat{nameyeardelim}{\addcomma\space}
+\addbibresource{references.bib}
+
+\setcounter{tocdepth}{2}
+
+\title{Econometric Methods I}
+\author{Wooyong Park\\ Lecture from MGTECON 603(Lecturer: Guido Imbens)}
+\date{Last Updated: \today}
+
+\begin{document}
+
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+\maketitle
+
+{
+
+This is a document in progress based on the lecture courses on Econometric Methods I by Professor Guido Imbens.
+Although I am sharing this document in public to be receptive of any feedback, I must note that this is not a complete document and \textbf{do not want the document to be shared without my permission.}
+Please abstain from sharing this document without the author's permission.
+}
+
+
+
+\tableofcontents
+
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+
+% \input{AR.tex}
+
+% \input{flow.tex}
+
+% \input{gan.tex}
+
+% \input{ebm.tex}
+
+\input{wk3.tex}
+
+
+\newpage
+\printbibliography
+
+\newpage
+\appendix
+
+\include{appendix.tex}
+\end{document}

@@ -1,0 +1,65 @@
+\section{Variance Estimation using Bootstrap and Resampling Methods}
+
+\subsection{Variance Estimation under Randomization}
+
+Upto now, we have been focusing on the estimator $\hat\tau=\overline{Y}_T-\overline{Y}_C$ that is unbiased under randomization.
+Depending on the source of randomness, we had two different variance definitions:
+
+\begin{align}
+    \Var_\text{Neyman}(\hat\tau) &= \frac{1}{N_1}S_1^2 + \frac{1}{N_0}S_0^2 - \frac{1}{N}S_{01}^2\label{eq:neyman_variance}\\
+    \Var_\text{OLS}(\hat\tau) &= \frac{\sigma^2}{\sum_{i=1}^N (W_i - \overline{W})^2} = \frac{\sigma^2}{N\frac{N_1}{N}\bigl(1- \frac{N_1}{N}\bigr)}\label{eq:ols_variance}
+\end{align}
+
+In the Neyman variance, $S_1^2$ and $S_0^2$ are the population\footnote{Note that the Neyman world views the experiment participants as the population, and the source of randomness is the permutation of the treatment indicator.} variances of $Y_i(1)$ and $Y_i(0)$, respectively; 
+the remaining term $S_{01}^2$ is \textbf{the population variance of the unit-level treatment effect}.
+In the OLS variance, $\sigma^2$ is the population variance of the normal error term($\varepsilon_i$), and $\overline{W}$ is the mean of the treatment indicator among our experimental units.
+
+The corresponding estimators for \eqref{eq:neyman_variance} and \eqref{eq:ols_variance} are given by:
+
+\begin{align}
+    \hat{\Var}_\text{Neyman}(\hat\tau) &= \frac{1}{N_1}\hat{S}_1^2 + \frac{1}{N_0}\hat{S}_0^2 \label{eq:neyman_variance_estimator}\\
+    \hat{\Var}_\text{OLS}(\hat\tau) &= \frac{\hat{\sigma}^2}{\sum_{i=1}^N (W_i - \overline{W})^2} = \frac{\hat{\sigma}^2}{N\frac{N_1}{N}\bigl(1- \frac{N_1}{N}\bigr)}\label{eq:ols_variance_estimator}
+\end{align}
+
+where $\hat{S}_1^2, \hat{S}_0^2$ are the sample variances of the observed outcomes in the treated and the control groups, respectively; $\hat{\sigma}^2 = \frac{1}{N-2}\sum_{i=1}^N \hat{\varepsilon}_i^2$ is the unbiased estimator of $\sigma^2$.
+
+
+Additionally, allowing \textit{heteroscedasticity} in the normal error term, we can derive the following variance estimand and the corresponding estimator:
+
+\begin{align}
+    \Var_\text{robust}(\hat\tau) &=\frac{1}{\bigl(N\overline{W}(1-\overline{W})\bigr)^2}\sum_{i=1}^N \biggl(\sigma_i^2(W_i - \overline{W})^2\biggr)\label{eq:heteroscedastic_variance}\\
+    \hat{\Var}_\text{robust}(\hat\tau) &= \frac{1}{\bigl(N\overline{W}(1-\overline{W})\bigr)^2}\sum_{i=1}^N \biggl(\hat{\varepsilon}_i^2(W_i - \overline{W})^2\biggr)\label{eq:heteroscedastic_variance_estimator}
+\end{align}
+
+In this section, we discuss additional class of variance estimators based on \textbf{resampling methods}. 
+By the end of this section, you will be able to:
+\begin{itemize}
+    \item Understand the intuition behind resampling methods.
+    \item Understand the sense of richness of these ideas.
+    \item Understand how to implement the methods in practice.
+\end{itemize}
+
+
+\subsection{One-Sample Example}
+
+Suppose we have a random sample $Y_1, \ldots, Y_N$ from a distribution with mean $\mu$ and variance $\sigma^2$, and we want to estimate the population mean $\mu$.
+This is a simpler problem than estimating the average treatment effect $\tau$ in the randomized experiment, but it still conveys the essence of the resampling methods.
+The natural estimator of $\mu$ is the sample mean $\overline{Y} = \frac{1}{N}\sum_{i=1}^N Y_i$.
+The variance of this estimator is given by $\Var(\overline{Y}) = \frac{\sigma^2}{N}$, which we typically estimate with:\footnote{The OLS variance estimator is essentially a generalization of this estimator to the regression case, but in the mean case we do not have to worry about heteroscedasticity.}
+
+\begin{align}
+    \hat{\Var}(\overline{Y}) &= \frac{\hat{\sigma}^2}{N} = \frac{1}{N-1}\sum_{i=1}^N \bigl(Y_i - \overline{Y}\bigr)^2\label{eq:one_sample_variance_estimator}
+\end{align}
+
+Here's the key point: \textbf{The variance of any function of $N$ random variables can be characterized in terms of the joint distribution of those random variables}, where the
+distribution can be written in terms of, CDFs($F_Y(y) = Pr(Y \leq y)$) or moment generating functions($M_Y(t) = \E(e^{tY})$), for example.
+In our case with a \textit{random sample}, \ref{eq:one_sample_variance_estimator} can be written as:
+
+\begin{align}
+    \frac{\hat{\sigma}}{\sqrt{N}} &= \frac{1}{N} \label{eq:one_sample_variance_estimator_2}
+\end{align}
+
+where $\overline{Y}$ is the sample mean of the random sample $Y_1, \ldots, Y_N$.
+
+
+\subsection{Bootstrap Method}

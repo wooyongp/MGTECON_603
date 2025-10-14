@@ -277,11 +277,11 @@ $\sum_{i=1}^N W_i = N_1, \sum_{i=1}^N (1-W_i) = N_0, Y_i(1), \text{ and } Y_i(0)
     &= \frac{1}{N_1(N-N_1)}\sum_{i=1}^N Y_i(0)\biggl(\frac{N}{N-1}Y_i(0) - \frac{1}{(N-1)} \sum_{j=1}^N Y_j(0)\biggr)\\
     &= \frac{N}{N_1(N-N_1)(N-1)}\sum_{i=1}^N Y_i(0)\biggl(Y_i(0) - \bar{Y(0)} \biggr)\\
     &= \frac{N}{N_1(N-N_1)(N-1)}\biggl(\sum_{i=1}^N Y_i(0)^2 - \bar{Y(0)}^2 \biggr)\\
-    &= \frac{N}{N_1N_0}S_1^2
+    &= \frac{N}{N_1N_0}S_0^2
 \end{align*}
 
 
-Likewise, we can show that $\Var_W(\hat\tau - \tau_c) = \frac{N}{N_1N_0}S_0^2$ by symmetry.
+Likewise, we can show that $\Var_W(\hat\tau - \tau_c) = \frac{N}{N_1N_0}S_1^2$ by symmetry.
 
 \subsection*{(a) and (b) - Unbiased Estimators for True Variances}
 
@@ -300,8 +300,8 @@ where $\bar{Y}_0$ and $\bar{Y}_1$ are the sample means of the control and treatm
 Therefore, the unbiased estimators for $\Var_W(\hat\tau - \tau_t)$ and $\Var_W(\hat\tau - \tau_c)$ are given by:
 
 \begin{align}
-    \hat{\Var}_W(\hat\tau - \tau_t) = \frac{N}{N_1N_0}s_1^2\label{eq:hat_var_tau_t}\\
-    \hat{\Var}_W(\hat\tau - \tau_c) = \frac{N}{N_1N_0}s_0^2\label{eq:hat_var_tau_c}
+    \hat{\Var}_W(\hat\tau - \tau_t) = \frac{N}{N_1N_0}s_0^2\label{eq:hat_var_tau_t}\\
+    \hat{\Var}_W(\hat\tau - \tau_c) = \frac{N}{N_1N_0}s_1^2\label{eq:hat_var_tau_c}
 \end{align}
 
 
@@ -320,7 +320,7 @@ However, for the first two terms, we can use the unbiased estimators for $S_0^2$
 Therefore, in cases where we have constant additive treatment effects, we can use the following unbiased estimator for $\Var_W(\hat\tau)$:
 
 \begin{align}
-    \hat{\Var}_W(\hat\tau) = \frac{1}{N_1}s_1^2 + \frac{1}{N_0}s_0^2  = \frac{N_1}{N}\hat{\Var}_W(\hat\tau - \tau_t) + \frac{N_0}{N}\hat{\Var}_W(\hat\tau - \tau_c)
+    \hat{\Var}_W(\hat\tau) = \frac{1}{N_1}s_1^2 + \frac{1}{N_0}s_0^2  = \frac{N_1}{N}\hat{\Var}_W(\hat\tau - \tau_c) + \frac{N_0}{N}\hat{\Var}_W(\hat\tau - \tau_t)
 \end{align}
 
 

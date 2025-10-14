@@ -1,0 +1,4 @@
+\contentsline {section}{\numberline {1}Variance Estimation using Bootstrap and Resampling Methods}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Variance Estimation under Randomization}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}One-Sample Example}{2}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Bootstrap Method}{2}{subsection.1.3}%
