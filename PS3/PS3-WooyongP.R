@@ -33,7 +33,7 @@ names(data) <- c("W", "earnings1yr", "earnings4yr", "hs_diploma", "female", "age
 # Pre-compute constants
 n <- nrow(data)
 M <- sum(data$W) # More efficient than nrow(data[W==1])
-B <- 100000 # Number of bootstrap samples
+B <- 10000 # Number of bootstrap samples
 
 ## Functions ----
 ### Optimized Function for Data Summary ----
@@ -162,20 +162,21 @@ bootstrap_se_4 <- sqrt(bootstrap_variance_4)
 
 z_90 <- qnorm(0.95)  # 1.645
 
-ci_90_lb_1 <- DIM_1 - z_90 * bootstrap_se_1
-ci_90_ub_1 <- DIM_1 + z_90 * bootstrap_se_1
-ci_90_lb_4 <- DIM_4 - z_90 * bootstrap_se_4
-ci_90_ub_4 <- DIM_4 + z_90 * bootstrap_se_4
+# Store vanilla bootstrap confidence intervals
+ci_90_lb_1_vanilla <- DIM_1 - z_90 * bootstrap_se_1
+ci_90_ub_1_vanilla <- DIM_1 + z_90 * bootstrap_se_1
+ci_90_lb_4_vanilla <- DIM_4 - z_90 * bootstrap_se_4
+ci_90_ub_4_vanilla <- DIM_4 + z_90 * bootstrap_se_4
 
 cat_to_file("bootstrap_variance_1: ", bootstrap_variance_1, "\n")
 cat_to_file("bootstrap_variance_4: ", bootstrap_variance_4, "\n")
 cat_to_file("bootstrap_se_1: ", bootstrap_se_1, "\n")
 cat_to_file("bootstrap_se_4: ", bootstrap_se_4, "\n")
 
-cat_to_file("ci_90_lb_1: ", ci_90_lb_1, "\n")
-cat_to_file("ci_90_ub_1: ", ci_90_ub_1, "\n")
-cat_to_file("ci_90_lb_4: ", ci_90_lb_4, "\n")
-cat_to_file("ci_90_ub_4: ", ci_90_ub_4, "\n")
+cat_to_file("ci_90_lb_1_vanilla: ", ci_90_lb_1_vanilla, "\n")
+cat_to_file("ci_90_ub_1_vanilla: ", ci_90_ub_1_vanilla, "\n")
+cat_to_file("ci_90_lb_4_vanilla: ", ci_90_lb_4_vanilla, "\n")
+cat_to_file("ci_90_ub_4_vanilla: ", ci_90_ub_4_vanilla, "\n")
 
 ## (b) ----
 cat_to_file("(b) ----\n")
@@ -201,44 +202,74 @@ bootstrap_variance_4_b <- sum((DIM_4_bboot_vector - DIM_4)^2) / B
 bootstrap_se_1_b <- sqrt(bootstrap_variance_1_b)
 bootstrap_se_4_b <- sqrt(bootstrap_variance_4_b)
 
-ci_90_lb_1 <- DIM_1 - z_90 * bootstrap_se_1_b
-ci_90_ub_1 <- DIM_1 + z_90 * bootstrap_se_1_b
-ci_90_lb_4 <- DIM_4 - z_90 * bootstrap_se_4_b
-ci_90_ub_4 <- DIM_4 + z_90 * bootstrap_se_4_b
+# Store Bayesian bootstrap confidence intervals
+ci_90_lb_1_bayesian <- DIM_1 - z_90 * bootstrap_se_1_b
+ci_90_ub_1_bayesian <- DIM_1 + z_90 * bootstrap_se_1_b
+ci_90_lb_4_bayesian <- DIM_4 - z_90 * bootstrap_se_4_b
+ci_90_ub_4_bayesian <- DIM_4 + z_90 * bootstrap_se_4_b
 
 cat_to_file("bootstrap_variance_1_b: ", bootstrap_variance_1_b, "\n")
 cat_to_file("bootstrap_variance_4_b: ", bootstrap_variance_4_b, "\n")
 cat_to_file("bootstrap_se_1_b: ", bootstrap_se_1_b, "\n")
 cat_to_file("bootstrap_se_4_b: ", bootstrap_se_4_b, "\n")
 
-cat_to_file("ci_90_lb_1_b: ", ci_90_lb_1, "\n")
-cat_to_file("ci_90_ub_1_b: ", ci_90_ub_1, "\n")
-cat_to_file("ci_90_lb_4_b: ", ci_90_lb_4, "\n")
-cat_to_file("ci_90_ub_4_b: ", ci_90_ub_4, "\n")
+cat_to_file("ci_90_lb_1_bayesian: ", ci_90_lb_1_bayesian, "\n")
+cat_to_file("ci_90_ub_1_bayesian: ", ci_90_ub_1_bayesian, "\n")
+cat_to_file("ci_90_lb_4_bayesian: ", ci_90_lb_4_bayesian, "\n")
+cat_to_file("ci_90_ub_4_bayesian: ", ci_90_ub_4_bayesian, "\n")
 
 ## (c) ----
 cat_to_file("(c) ----\n")
-### quantile approach for the vanilla bootstrap samples ----
-percentile_5th_1 <- quantile(DIM_1_boot_vector, probs = 0.05)
-percentile_95th_1 <- quantile(DIM_1_boot_vector, probs = 0.95)
-cat_to_file("5th percentile of DIM_1_boot_vector: ", percentile_5th_1, "\n")
-cat_to_file("95th percentile of DIM_1_boot_vector: ", percentile_95th_1, "\n")
 
-percentile_5th_4 <- quantile(DIM_4_boot_vector, probs = 0.05)
-percentile_95th_4 <- quantile(DIM_4_boot_vector, probs = 0.95)
-cat_to_file("5th percentile of DIM_4_boot_vector: ", percentile_5th_4, "\n")
-cat_to_file("95th percentile of DIM_4_boot_vector: ", percentile_95th_4, "\n")
 
-### quantile approach for the bayesian bootstrap samples ----
-percentile_5th_1_b <- quantile(DIM_1_bboot_vector, probs = 0.05)
-percentile_95th_1_b <- quantile(DIM_1_bboot_vector, probs = 0.95)
-cat_to_file("5th percentile of DIM_1_bboot_vector: ", percentile_5th_1_b, "\n")
-cat_to_file("95th percentile of DIM_1_bboot_vector: ", percentile_95th_1_b, "\n")
+### compute the Neyman standard error
+Neyman_se_1 <- sqrt(data_treated[, .(var = sample_variance(earnings1yr))] / nrow(data_treated) + data_control[, .(var = sample_variance(earnings1yr))] / nrow(data_control)) |> as.numeric()
+Neyman_se_4 <- sqrt(data_treated[, .(var = sample_variance(earnings4yr))] / nrow(data_treated) + data_control[, .(var = sample_variance(earnings4yr))] / nrow(data_control)) |> as.numeric()
+cat_to_file("Neyman_se_1: ", Neyman_se_1, "\n")
+cat_to_file("Neyman_se_4: ", Neyman_se_4, "\n")
 
-percentile_5th_4_b <- quantile(DIM_4_bboot_vector, probs = 0.05)
-percentile_95th_4_b <- quantile(DIM_4_bboot_vector, probs = 0.95)
-cat_to_file("5th percentile of DIM_4_bboot_vector: ", percentile_5th_4_b, "\n")
-cat_to_file("95th percentile of DIM_4_bboot_vector: ", percentile_95th_4_b, "\n")
+
+DIM_1_boot_vector_pivot <- c()
+DIM_4_boot_vector_pivot <- c()
+
+for (i in 1:B){
+  dt <- data |> sample_n(size = n, replace = TRUE)
+  temp1 <- as.numeric(dt[W==1, .(mean = mean(earnings1yr))] - dt[W==0, .(mean = mean(earnings1yr))])
+  temp2 <- as.numeric(dt[W==1, .(mean = mean(earnings4yr))] - dt[W==0, .(mean = mean(earnings4yr))])
+  
+  # Compute Neyman standard errors for this bootstrap sample
+  dt_treated <- dt[W==1]
+  dt_control <- dt[W==0]
+  se_1_boot <- sqrt(dt_treated[, .(var = sample_variance(earnings1yr))] / nrow(dt_treated) + dt_control[, .(var = sample_variance(earnings1yr))] / nrow(dt_control)) |> as.numeric()
+  se_4_boot <- sqrt(dt_treated[, .(var = sample_variance(earnings4yr))] / nrow(dt_treated) + dt_control[, .(var = sample_variance(earnings4yr))] / nrow(dt_control)) |> as.numeric()
+
+  temp1 <- (temp1 - DIM_1) / se_1_boot
+  temp2 <- (temp2 - DIM_4) / se_4_boot
+  DIM_1_boot_vector_pivot[i] <- temp1
+  DIM_4_boot_vector_pivot[i] <- temp2
+}
+
+### quantiles
+percentile_5th_1 <- quantile(DIM_1_boot_vector_pivot, probs = 0.05)
+percentile_95th_1 <- quantile(DIM_1_boot_vector_pivot, probs = 0.95)
+percentile_5th_4 <- quantile(DIM_4_boot_vector_pivot, probs = 0.05)
+percentile_95th_4 <- quantile(DIM_4_boot_vector_pivot, probs = 0.95)
+cat_to_file("5th percentile of DIM_1_boot_vector_pivot: ", percentile_5th_1, "\n")
+cat_to_file("95th percentile of DIM_1_boot_vector_pivot: ", percentile_95th_1, "\n")
+cat_to_file("5th percentile of DIM_4_boot_vector_pivot: ", percentile_5th_4, "\n")
+cat_to_file("95th percentile of DIM_4_boot_vector_pivot: ", percentile_95th_4, "\n")
+
+
+### Confidence intervals
+ci_90_lb_1 <- DIM_1 - percentile_95th_1 * Neyman_se_1
+ci_90_ub_1 <- DIM_1 - percentile_5th_1 * Neyman_se_1
+ci_90_lb_4 <- DIM_4 - percentile_95th_4 * Neyman_se_4
+ci_90_ub_4 <- DIM_4 - percentile_5th_4 * Neyman_se_4
+
+cat_to_file("ci_90_lb_1: ", ci_90_lb_1, "\n")
+cat_to_file("ci_90_ub_1: ", ci_90_ub_1, "\n")
+cat_to_file("ci_90_lb_4: ", ci_90_lb_4, "\n")
+cat_to_file("ci_90_ub_4: ", ci_90_ub_4, "\n")
 
 
 ## (d) ----
@@ -265,19 +296,20 @@ bootstrap_variance_4_s <- sum((DIM_4_sboot_vector - DIM_4)^2) / B *(subsample_si
 bootstrap_se_1_s <- sqrt(bootstrap_variance_1_s)
 bootstrap_se_4_s <- sqrt(bootstrap_variance_4_s)
 
-ci_90_lb_1 <- DIM_1 - z_90 * bootstrap_se_1_s
-ci_90_ub_1 <- DIM_1 + z_90 * bootstrap_se_1_s
-ci_90_lb_4 <- DIM_4 - z_90 * bootstrap_se_4_s
-ci_90_ub_4 <- DIM_4 + z_90 * bootstrap_se_4_s
+# Store subsampling bootstrap confidence intervals
+ci_90_lb_1_subsampling <- DIM_1 - z_90 * bootstrap_se_1_s
+ci_90_ub_1_subsampling <- DIM_1 + z_90 * bootstrap_se_1_s
+ci_90_lb_4_subsampling <- DIM_4 - z_90 * bootstrap_se_4_s
+ci_90_ub_4_subsampling <- DIM_4 + z_90 * bootstrap_se_4_s
 
 cat_to_file("bootstrap_variance_1_s: ", bootstrap_variance_1_s, "\n")
 cat_to_file("bootstrap_variance_4_s: ", bootstrap_variance_4_s, "\n")
 cat_to_file("bootstrap_se_1_s: ", bootstrap_se_1_s, "\n")
 cat_to_file("bootstrap_se_4_s: ", bootstrap_se_4_s, "\n")
-cat_to_file("ci_90_lb_1_s: ", ci_90_lb_1, "\n")
-cat_to_file("ci_90_ub_1_s: ", ci_90_ub_1, "\n")
-cat_to_file("ci_90_lb_4_s: ", ci_90_lb_4, "\n")
-cat_to_file("ci_90_ub_4_s: ", ci_90_ub_4, "\n")
+cat_to_file("ci_90_lb_1_subsampling: ", ci_90_lb_1_subsampling, "\n")
+cat_to_file("ci_90_ub_1_subsampling: ", ci_90_ub_1_subsampling, "\n")
+cat_to_file("ci_90_lb_4_subsampling: ", ci_90_lb_4_subsampling, "\n")
+cat_to_file("ci_90_ub_4_subsampling: ", ci_90_ub_4_subsampling, "\n")
 
 
 ## (e) ----
@@ -375,35 +407,18 @@ cat_to_file("Creating comparison plots...\n")
 # Note: Some variables get overwritten, so we need to recalculate or use the final values
 
 # 1-year earnings results
-methods_1yr <- c("Vanilla Bootstrap", "Bayesian Bootstrap", "Percentile Bootstrap", "Subsampling Bootstrap", "OLS Parametric Bootstrap")
+methods_1yr <- c("Vanilla Bootstrap", "Bayesian Bootstrap", "Pivotal Bootstrap", "Subsampling Bootstrap", "OLS Parametric Bootstrap")
 estimates_1yr <- c(DIM_1, DIM_1, DIM_1, DIM_1, ATE_1)  # Point estimates
 
-# For Bayesian bootstrap, we need to recalculate since variables were overwritten
-bayesian_se_1 <- sqrt(bootstrap_variance_1_b)
-bayesian_ci_lb_1 <- DIM_1 - z_90 * bayesian_se_1
-bayesian_ci_ub_1 <- DIM_1 + z_90 * bayesian_se_1
-
-# For subsampling, we need to recalculate since variables were overwritten  
-subsampling_se_1 <- sqrt(bootstrap_variance_1_s)
-subsampling_ci_lb_1 <- DIM_1 - z_90 * subsampling_se_1
-subsampling_ci_ub_1 <- DIM_1 + z_90 * subsampling_se_1
-
-ci_lower_1yr <- c(ci_90_lb_1, bayesian_ci_lb_1, percentile_5th_1, subsampling_ci_lb_1, ci_90_lb_ATE_1)
-ci_upper_1yr <- c(ci_90_ub_1, bayesian_ci_ub_1, percentile_95th_1, subsampling_ci_ub_1, ci_90_ub_ATE_1)
+# Now we can use the unique variable names that were properly stored
+ci_lower_1yr <- c(ci_90_lb_1_vanilla, ci_90_lb_1_bayesian, ci_90_lb_1, ci_90_lb_1_subsampling, ci_90_lb_ATE_1)
+ci_upper_1yr <- c(ci_90_ub_1_vanilla, ci_90_ub_1_bayesian, ci_90_ub_1, ci_90_ub_1_subsampling, ci_90_ub_ATE_1)
 
 # 4-year earnings results
-bayesian_se_4 <- sqrt(bootstrap_variance_4_b)
-bayesian_ci_lb_4 <- DIM_4 - z_90 * bayesian_se_4
-bayesian_ci_ub_4 <- DIM_4 + z_90 * bayesian_se_4
-
-subsampling_se_4 <- sqrt(bootstrap_variance_4_s)
-subsampling_ci_lb_4 <- DIM_4 - z_90 * subsampling_se_4
-subsampling_ci_ub_4 <- DIM_4 + z_90 * subsampling_se_4
-
-methods_4yr <- c("Vanilla Bootstrap", "Bayesian Bootstrap", "Percentile Bootstrap", "Subsampling Bootstrap", "OLS Parametric Bootstrap")
+methods_4yr <- c("Vanilla Bootstrap", "Bayesian Bootstrap", "Pivotal Bootstrap", "Subsampling Bootstrap", "OLS Parametric Bootstrap")
 estimates_4yr <- c(DIM_4, DIM_4, DIM_4, DIM_4, ATE_4)  # Point estimates
-ci_lower_4yr <- c(ci_90_lb_4, bayesian_ci_lb_4, percentile_5th_4, subsampling_ci_lb_4, ci_90_lb_ATE_4)
-ci_upper_4yr <- c(ci_90_ub_4, bayesian_ci_ub_4, percentile_95th_4, subsampling_ci_ub_4, ci_90_ub_ATE_4)
+ci_lower_4yr <- c(ci_90_lb_4_vanilla, ci_90_lb_4_bayesian, ci_90_lb_4, ci_90_lb_4_subsampling, ci_90_lb_ATE_4)
+ci_upper_4yr <- c(ci_90_ub_4_vanilla, ci_90_ub_4_bayesian, ci_90_ub_4, ci_90_ub_4_subsampling, ci_90_ub_ATE_4)
 
 # Create data frames for plotting
 plot_data_1yr <- data.frame(

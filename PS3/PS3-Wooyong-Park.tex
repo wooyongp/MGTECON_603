@@ -112,7 +112,7 @@ The plain vanilla bootstrap was implemented using the following approach in algo
 \begin{algorithm}
     \caption{Bootstrap Sampling Process}
     \label{alg:bootstrap_sampling_process}
-    For each bootstrap iteration $i \in \{1, 2, \ldots, B\}$ where $B = 100000$:
+    For each bootstrap iteration $i \in \{1, 2, \ldots, B\}$ where $B = 10000$:
     \begin{enumerate}
     \item \textbf{Resampling}: Draw a bootstrap sample $d^{(i)}$ of size $n$ (original sample size) \textit{with replacement} from the original dataset. 
     
@@ -162,6 +162,10 @@ The caveat for the plain vanilla bootstrap is that we might end up with a bootst
 In this case, we might not be able to estimate the ATE without any modification to the bootstrap sampling process.
 
 
+
+\newpage
+
+
 \subsection{(b) Bayesian Bootstrap}
 
 The Bayesian bootstrap was implemented using the following approach in algorithm \ref{alg:bayesian_bootstrap_sampling_process}.
@@ -170,7 +174,7 @@ The Bayesian bootstrap was implemented using the following approach in algorithm
 \begin{algorithm}
     \caption{Bayesian Bootstrap Sampling Process}
     \label{alg:bayesian_bootstrap_sampling_process}
-    For each bootstrap iteration $i \in \{1, 2, \ldots, B\}$ where $B = 100000$:
+    For each bootstrap iteration $i \in \{1, 2, \ldots, B\}$ where $B = 10000$:
     \begin{enumerate}
         \item \textbf{Generate Exponential Weights}: 
         \begin{align}
@@ -228,16 +232,65 @@ In this case, we might not be able to estimate the ATE without any modification 
 \end{table}
 
 
-\subsection{(c) Percentile Bootstrap with t-stats}
+\newpage
 
 
+\subsection{(c) Pivotal Bootstrap with t-stats}
 
-Here, I follow the exact same procedures in algorithms \ref{alg:bootstrap_sampling_process} and \ref{alg:bayesian_bootstrap_sampling_process} but construct the confidence intervals with the 0.05 and 0.95 quantiles of the bootstrap t-statistic from step 3 instead of plugging in the bootstrap standard error to the normal distribution.
+The pivotal bootstrap  uses bootstrap t-statistics to construct confidence intervals, which often provides better finite-sample properties than simple percentile methods.
+The procedure is implemented in algorithm \ref{alg:pivotal_bootstrap}.
+
+\begin{algorithm}
+    \caption{Pivotal Bootstrap with t-statistics}
+    \label{alg:pivotal_bootstrap}
+    \begin{enumerate}
+        \item \textbf{Compute Neyman Standard Error}: Calculate the Neyman standard error for the difference-in-means estimator:
+        \begin{align}
+            \hat{SE}_{Neyman,1} &= \sqrt{\frac{\hat{V}_{1,1}}{n_1} + \frac{\hat{V}_{1,0}}{n_0}} \\
+            \hat{SE}_{Neyman,4} &= \sqrt{\frac{\hat{V}_{4,1}}{n_1} + \frac{\hat{V}_{4,0}}{n_0}}
+        \end{align}
+        where $\hat{V}_{1,1}$ and $\hat{V}_{1,0}$ are the sample variances of earnings1yr in the treated and control groups respectively, and $n_1$, $n_0$ are the group sizes.
+        
+        \item \textbf{Bootstrap t-statistics}: For each bootstrap iteration $i \in \{1, 2, \ldots, B\}$ where $B = 10000$:
+        \begin{itemize}
+            \item Draw a bootstrap sample $d^{(i)}$ of size $n$ with replacement from the original dataset
+            \item Compute the bootstrap difference-in-means:
+            \begin{align}
+                \hat{\tau}^{(i)}_1 &= \frac{1}{n^{(i)}_1} \sum_{j: W_j = 1} Y_{1j}^{(i)} - \frac{1}{n^{(i)}_0} \sum_{j: W_j = 0} Y_{1j}^{(i)} \\
+                \hat{\tau}^{(i)}_4 &= \frac{1}{n^{(i)}_1} \sum_{j: W_j = 1} Y_{4j}^{(i)} - \frac{1}{n^{(i)}_0} \sum_{j: W_j = 0} Y_{4j}^{(i)}
+            \end{align}
+            \item Compute the bootstrap standard errors (same as the Neyman SEs on the bootstrap sample):
+            \begin{align}
+                \hat{SE}^{(i)}_1 &= \sqrt{\text{Var}(\hat{\tau}^{(i)}_1)} \\
+                \hat{SE}^{(i)}_4 &= \sqrt{\text{Var}(\hat{\tau}^{(i)}_4)}
+            \end{align}
+            \item Calculate the bootstrap t-statistics:
+            \begin{align}
+                t^{(i)}_1 &= \frac{\hat{\tau}^{(i)}_1 - \hat{\tau}_1}{\hat{SE}^{(i)}_1} \\
+                t^{(i)}_4 &= \frac{\hat{\tau}^{(i)}_4 - \hat{\tau}_4}{\hat{SE}^{(i)}_4}
+            \end{align}
+            \item Store the t-statistics: $t^{(i)}_1$ and $t^{(i)}_4$
+        \end{itemize}
+        
+        \item \textbf{Compute t-statistic Percentiles}: Calculate the percentiles of the bootstrap t-statistics:
+        \begin{align}
+            t_{p,s} &= \text{quantile}(\{t^{(i)}_s\}_{i=1}^B, p) 
+        \end{align}
+        where $s \in \{1, 4\}$ and $p \in \{0.05, 0.95\}$.
+        
+        \item \textbf{Construct Confidence Intervals}: The 90\% confidence intervals are:
+        \begin{align}
+            \text{CI}_{90,1} &= [\hat{\tau}_1 - t_{0.95,1} \times \hat{SE}_{Neyman,1}, \hat{\tau}_1 - t_{0.05,1} \times \hat{SE}_{Neyman,1}] \\
+            \text{CI}_{90,4} &= [\hat{\tau}_4 - t_{0.95,4} \times \hat{SE}_{Neyman,4}, \hat{\tau}_4 - t_{0.05,4} \times \hat{SE}_{Neyman,4}]
+        \end{align}
+    \end{enumerate}
+\end{algorithm}
+
+
 
 \subsubsection{Results}
 
-The results are shown in table \ref{tab:percentile_bootstrap_results}.
-
+The results are shown in table \ref{tab:pivotal_bootstrap_results}.
 
 \begin{table}[h]
     \centering
@@ -245,21 +298,28 @@ The results are shown in table \ref{tab:percentile_bootstrap_results}.
         \hline
          & earnings 1yr & earnings 4yr \\
         \hline
-        DIM estimate & 1.1362  & 1.2323 \\
-        Percentile Bootstrap Confidence Intervals(90\%) & (0.9044, 1.3370) & (0.7862, 1.6615) \\
-        Percentile Bayesian Bootstrap Confidence Intervals(90\%) & (0.9208, 1.3484) & (0.8448, 1.6419) \\
+        Neyman Standard Error & 0.1341 & 0.2488 \\
+        Pivotal Bootstrap Confidence Intervals(90\%) & $[0.9070, 1.3515]$ & $[0.8112, 1.6324]$ \\
         \hline
     \end{tabular}
-    \caption{\label{tab:percentile_bootstrap_results}Percentile Bootstrap Results with t-stats}
+    \caption{\label{tab:pivotal_bootstrap_results}Pivotal Bootstrap Results}
 \end{table}
 
-The 0.05 and 0.95 percentiles for the bootstrap t-stats are 0.9044 and 1.3370, respectively.
+The t-statistic percentiles from the bootstrap distribution are:
+\begin{itemize}
+    \item 5th percentile for 1-year earnings: -1.6051
+    \item 95th percentile for 1-year earnings: 1.7087
+    \item 5th percentile for 4-year earnings: -1.6077
+    \item 95th percentile for 4-year earnings: 1.6927
+\end{itemize}
+
+
+\newpage
 
 \subsection{(d) Subsampling}
 
-The subsampling bootstrap was implemented using the following approach:
+The subsampling bootstrap was implemented using the following approach in algorithm \ref{alg:subsampling_bootstrap_process}.
 
-\subsubsection{Subsampling Bootstrap Process}
 
 \begin{algorithm}
     \caption{Subsampling Bootstrap Process}
@@ -313,6 +373,10 @@ The results are shown in table \ref{tab:subsampling_bootstrap_results}.
     \caption{\label{tab:subsampling_bootstrap_results}Subsampling Bootstrap Results}
 \end{table}
 
+
+\newpage
+
+
 \subsection{(e) OLS Regression}
 
 To estimate the average treatment effect while adjusting for whether individuals have a high school degree, I use an interacted linear regression (OLS) approach. 
@@ -342,7 +406,10 @@ I choose the interacted OLS regression for the following reasons:
 \end{itemize}
 
 
+
 \subsubsection{Parametric Bootstrap Process}
+
+The parametric bootstrap procedure is implemented in algorithm \ref{alg:parametric_bootstrap_ols}.
 
 \begin{algorithm}
     \caption{Parametric Bootstrap for OLS Regression}
@@ -400,7 +467,6 @@ I choose the interacted OLS regression for the following reasons:
 %     \item \textbf{Theoretical Foundation}: Well-grounded in classical regression theory and provides valid inference under standard regression assumptions.
 % \end{itemize}
 
-\newpage
 
 \subsubsection{Results}
 
@@ -426,7 +492,7 @@ Also, just for the sake of comparison with other bootstrap procedures, I report 
 \end{table}
 
 
-\subsubsection{Comparison of Different Bootstrap Procedures}
+\subsection{Comparison of Different Bootstrap Procedures}
 
 
 Figure~\ref{fig:bootstrap_comparison} presents a comparison of several bootstrap methods for estimating 90\% confidence intervals for the treatment effect, both for 1-year and 4-year log-earnings outcomes. The methods compared include the vanilla (nonparametric) bootstrap, Bayesian bootstrap, percentile bootstrap, subsampling bootstrap, and the OLS parametric bootstrap.
@@ -446,6 +512,7 @@ Figure~\ref{fig:bootstrap_comparison} presents a comparison of several bootstrap
 
 
 
+\newpage
 
 
 

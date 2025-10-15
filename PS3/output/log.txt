@@ -2,72 +2,74 @@ DIM_1:  1.13621
 DIM_4:  1.232332 
 Problem 1 ----
 (a) ----
-bootstrap_variance_1:  0.01798588 
-bootstrap_variance_4:  0.06244086 
-bootstrap_se_1:  0.1341115 
-bootstrap_se_4:  0.2498817 
-ci_90_lb_1:  0.9156165 
-ci_90_ub_1:  1.356804 
-ci_90_lb_4:  0.8213133 
-ci_90_ub_4:  1.643351 
+bootstrap_variance_1:  0.01807565 
+bootstrap_variance_4:  0.06331622 
+bootstrap_se_1:  0.1344457 
+bootstrap_se_4:  0.2516271 
+ci_90_lb_1_vanilla:  0.9150667 
+ci_90_ub_1_vanilla:  1.357354 
+ci_90_lb_4_vanilla:  0.8184423 
+ci_90_ub_4_vanilla:  1.646222 
 (b) ----
-bootstrap_variance_1_b:  0.01784739 
-bootstrap_variance_4_b:  0.06186049 
-bootstrap_se_1_b:  0.1335941 
-bootstrap_se_4_b:  0.2487177 
-ci_90_lb_1_b:  0.9164674 
-ci_90_ub_1_b:  1.355953 
-ci_90_lb_4_b:  0.8232279 
-ci_90_ub_4_b:  1.641436 
+bootstrap_variance_1_b:  0.01818944 
+bootstrap_variance_4_b:  0.06292363 
+bootstrap_se_1_b:  0.1348682 
+bootstrap_se_4_b:  0.2508458 
+ci_90_lb_1_bayesian:  0.9143717 
+ci_90_ub_1_bayesian:  1.358049 
+ci_90_lb_4_bayesian:  0.8197275 
+ci_90_ub_4_bayesian:  1.644937 
 (c) ----
-5th percentile of DIM_1_boot_vector:  0.9129038 
-95th percentile of DIM_1_boot_vector:  1.354802 
-5th percentile of DIM_4_boot_vector:  0.8155951 
-95th percentile of DIM_4_boot_vector:  1.638675 
-5th percentile of DIM_1_bboot_vector:  0.9134031 
-95th percentile of DIM_1_bboot_vector:  1.352457 
-5th percentile of DIM_4_bboot_vector:  0.8156797 
-95th percentile of DIM_4_bboot_vector:  1.632094 
+Neyman_se_1:  0.1341387 
+Neyman_se_4:  0.248813 
+5th percentile of DIM_1_boot_vector_pivot:  -1.605139 
+95th percentile of DIM_1_boot_vector_pivot:  1.70873 
+5th percentile of DIM_4_boot_vector_pivot:  -1.607725 
+95th percentile of DIM_4_boot_vector_pivot:  1.692683 
+ci_90_lb_1:  0.9070034 
+ci_90_ub_1:  1.351522 
+ci_90_lb_4:  0.8111706 
+ci_90_ub_4:  1.632355 
 (d) ----
-bootstrap_variance_1_s:  0.01855353 
-bootstrap_variance_4_s:  0.06463376 
-bootstrap_se_1_s:  0.1362113 
-bootstrap_se_4_s:  0.2542317 
-ci_90_lb_1_s:  0.9121625 
-ci_90_ub_1_s:  1.360258 
-ci_90_lb_4_s:  0.8141582 
-ci_90_ub_4_s:  1.650506 
+bootstrap_variance_1_s:  0.01921527 
+bootstrap_variance_4_s:  0.06488517 
+bootstrap_se_1_s:  0.1386192 
+bootstrap_se_4_s:  0.2547257 
+ci_90_lb_1_subsampling:  0.908202 
+ci_90_ub_1_subsampling:  1.364218 
+ci_90_lb_4_subsampling:  0.8133457 
+ci_90_ub_4_subsampling:  1.651319 
 (e) ----
 ATE_1:  1.136216 
 ATE_4:  1.232352 
 p_hs (proportion with hs diploma):  0.5231593 
-parametric_bootstrap_variance_ATE_1:  0.02860184 
-parametric_bootstrap_variance_ATE_4:  0.07695862 
-parametric_bootstrap_se_ATE_1:  0.1691208 
-parametric_bootstrap_se_ATE_4:  0.2774142 
-ci_90_lb_ATE_1:  0.8580368 
-ci_90_ub_ATE_1:  1.414395 
-ci_90_lb_ATE_4:  0.7760459 
-ci_90_ub_ATE_4:  1.688657 
-ci_95_lb_ATE_1:  0.804745 
-ci_95_ub_ATE_1:  1.467686 
-ci_95_lb_ATE_4:  0.6886299 
-ci_95_ub_ATE_4:  1.776073 
+parametric_bootstrap_variance_ATE_1:  0.02803797 
+parametric_bootstrap_variance_ATE_4:  0.0766827 
+parametric_bootstrap_se_ATE_1:  0.1674454 
+parametric_bootstrap_se_ATE_4:  0.2769164 
+ci_90_lb_ATE_1:  0.8607925 
+ci_90_ub_ATE_1:  1.411639 
+ci_90_lb_ATE_4:  0.7768647 
+ci_90_ub_ATE_4:  1.687839 
+ci_95_lb_ATE_1:  0.8080287 
+ci_95_ub_ATE_1:  1.464403 
+ci_95_lb_ATE_4:  0.6896054 
+ci_95_ub_ATE_4:  1.775098 
 Creating comparison plots...
 
 === Bootstrap Method Comparison Summary ===
 1-Year Earnings - Confidence Interval Widths:
-Vanilla Bootstrap: 0.4481
-Bayesian Bootstrap: 0.4395
-Percentile Bootstrap: 0.4419
-Subsampling Bootstrap: 0.4481
-OLS Parametric Bootstrap: 0.5564
+Vanilla Bootstrap: 0.4423
+Bayesian Bootstrap: 0.4437
+Pivotal Bootstrap: 0.4445
+Subsampling Bootstrap: 0.4560
+OLS Parametric Bootstrap: 0.5508
 
 4-Year Earnings - Confidence Interval Widths:
-Vanilla Bootstrap: 0.8363
-Bayesian Bootstrap: 0.8182
-Percentile Bootstrap: 0.8231
-Subsampling Bootstrap: 0.8363
-OLS Parametric Bootstrap: 0.9126
+Vanilla Bootstrap: 0.8278
+Bayesian Bootstrap: 0.8252
+Pivotal Bootstrap: 0.8212
+Subsampling Bootstrap: 0.8380
+OLS Parametric Bootstrap: 0.9110
 
 Plots saved to output directory.

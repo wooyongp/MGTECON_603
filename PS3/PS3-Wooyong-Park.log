@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.4.6)  14 OCT 2025 13:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.4.6)  14 OCT 2025 17:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1135,12 +1135,12 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 83.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<output/histogram_earnings1yr_by_treatment_arm.png, id=72, 578.16pt x 433.62pt>
+<output/histogram_earnings1yr_by_treatment_arm.png, id=76, 578.16pt x 433.62pt>
 File: output/histogram_earnings1yr_by_treatment_arm.png Graphic file (type png)
 <use output/histogram_earnings1yr_by_treatment_arm.png>
 Package pdftex.def Info: output/histogram_earnings1yr_by_treatment_arm.png  used on input line 95.
 (pdftex.def)             Requested size: 180.385pt x 135.28757pt.
-<output/histogram_earnings4yr_by_treatment_arm.png, id=74, 578.16pt x 433.62pt>
+<output/histogram_earnings4yr_by_treatment_arm.png, id=78, 578.16pt x 433.62pt>
 File: output/histogram_earnings4yr_by_treatment_arm.png Graphic file (type png)
 <use output/histogram_earnings4yr_by_treatment_arm.png>
 Package pdftex.def Info: output/histogram_earnings4yr_by_treatment_arm.png  used on input line 99.
@@ -1163,7 +1163,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 [4]
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: Float too large for page by 49.74924pt on input line 287.
 
 
 
@@ -1171,26 +1171,34 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 [6]
 
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+
 [7]
-<output/bootstrap_comparison_1yr.png, id=198, 867.24pt x 578.16pt>
-File: output/bootstrap_comparison_1yr.png Graphic file (type png)
-<use output/bootstrap_comparison_1yr.png>
-Package pdftex.def Info: output/bootstrap_comparison_1yr.png  used on input line 437.
-(pdftex.def)             Requested size: 225.4804pt x 150.31805pt.
-<output/bootstrap_comparison_4yr.png, id=199, 867.24pt x 578.16pt>
-File: output/bootstrap_comparison_4yr.png Graphic file (type png)
-<use output/bootstrap_comparison_4yr.png>
-Package pdftex.def Info: output/bootstrap_comparison_4yr.png  used on input line 441.
-(pdftex.def)             Requested size: 225.4804pt x 150.31805pt.
 
-
-[8 <./output/bootstrap_comparison_1yr.png> <./output/bootstrap_comparison_4yr.png>]
+[8]
 
 [9]
+<output/bootstrap_comparison_1yr.png, id=226, 867.24pt x 578.16pt>
+File: output/bootstrap_comparison_1yr.png Graphic file (type png)
+<use output/bootstrap_comparison_1yr.png>
+Package pdftex.def Info: output/bootstrap_comparison_1yr.png  used on input line 503.
+(pdftex.def)             Requested size: 225.4804pt x 150.31805pt.
+<output/bootstrap_comparison_4yr.png, id=227, 867.24pt x 578.16pt>
+File: output/bootstrap_comparison_4yr.png Graphic file (type png)
+<use output/bootstrap_comparison_4yr.png>
+Package pdftex.def Info: output/bootstrap_comparison_4yr.png  used on input line 507.
+(pdftex.def)             Requested size: 225.4804pt x 150.31805pt.
 
-[10]
 
-[11] (./output/summary_stats.tex)
+[10 <./output/bootstrap_comparison_1yr.png> <./output/bootstrap_comparison_4yr.png>]
+
+[11]
+
+[12]
+
+[13] (./output/summary_stats.tex)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -1203,40 +1211,40 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-LaTeX Warning: Empty bibliography on input line 604.
+LaTeX Warning: Empty bibliography on input line 671.
 
 
-
-[12]
-
-[13]
 
 [14]
 
-[15] (./PS3-Wooyong-Park.aux)
+[15]
+
+[16]
+
+[17] (./PS3-Wooyong-Park.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `PS3-Wooyong-Park.out' has not changed.
-(rerunfilecheck)             Checksum: D09F118763FBD087C471F6B32240C3FE;1418.
+(rerunfilecheck)             Checksum: DE8AB45BB8E41C60588840747B564C5F;1693.
 Package logreq Info: Writing requests to 'PS3-Wooyong-Park.run.xml'.
 \openout1 = `PS3-Wooyong-Park.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 46142 strings out of 473190
- 1053033 string characters out of 5715801
- 2013009 words of memory out of 5000000
- 68594 multiletter control sequences out of 15000+600000
+ 46161 strings out of 473190
+ 1053241 string characters out of 5715801
+ 2013059 words of memory out of 5000000
+ 68596 multiletter control sequences out of 15000+600000
  569594 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  93i,19n,113p,801b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on PS3-Wooyong-Park.pdf (15 pages, 746299 bytes).
+Output written on PS3-Wooyong-Park.pdf (17 pages, 750525 bytes).
 PDF statistics:
- 372 PDF objects out of 1000 (max. 8388607)
- 292 compressed objects within 3 object streams
- 119 named destinations out of 1000 (max. 500000)
- 201 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 403 PDF objects out of 1000 (max. 8388607)
+ 320 compressed objects within 4 object streams
+ 136 named destinations out of 1000 (max. 500000)
+ 209 words of extra memory for PDF output out of 10000 (max. 10000000)
 
