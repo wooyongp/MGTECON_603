@@ -1,0 +1,10 @@
+mean_age:  1955.397 
+sd_age:  2.904956 
+mean_wage:  439.4709 
+sd_wage:  364.9407 
+coverage_model_200:  0.9152 
+coverage_model_200_hetero:  0.947 
+coverage_model_2000:  0.9186 
+coverage_model_2000_hetero:  0.9532 
+coverage_model_20:  0.9083 
+coverage_model_20_hetero:  0.9062 
