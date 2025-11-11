@@ -1,0 +1,456 @@
+\section{Estimating Average Treatment Effects in Randomized Experiments}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/sec3-1.pdf}
+    \caption*{Guido's with Neyman most of the way:)}
+\end{figure}
+
+\subsection{Neyman's Repeated Sampling Approach}
+
+While Fisher was developing his p-value calculations for \textbf{sharp null hypotheses},
+Jerzy Neyman was focusing on methods for estimating the \textbf{average treatment effects}.
+His approach was to consider an estimator and derive its distribution(bias and variance) under \textbf{repeated sampling} by drawing from the randomization distribution of the assignment vector $\mathbf{W}$(i.e., $\mathbf{W}$ is still stochastic).
+The potential outcomes $\mathbf{Y}(1), \mathbf{Y}(0)$ are still fixed in this thought experiment as well.
+
+\subsection{Unbiased Estimation of the Average Treatment Effect}
+
+Neyman was interested in the \textbf{population average treatment effect} defined as:
+
+\begin{align}
+    \tau \equiv \frac{1}{N}\sum_{i=1}^N \underbrace{\bigl(Y_i(1) - Y_i(0)\bigr)}_\text{deterministic(only one is observed)}
+\end{align}
+
+Suppose that we observed data from a completely randomized experiment in which $M$ units were assigned to the treatment and $N-M$ units were assigned to the control.
+Given randomization, the intuitive estimator for the average treatment effect is the difference-in-means estimator:
+
+\begin{align}
+    \hat\tau = \frac{1}{M}\sum_{i=1}^N Y_i(1) - \frac{1}{N-M}\sum_{i=1}^N Y_i(0)
+\end{align}
+
+where $M$ and $N-M$ are the number of units assigned to the treatment and the control, respectively.
+
+This estimator is unbiased for the population average treatment effect under randomization:
+
+\begin{align}
+    \E\bigl[\hat\tau\bigr] &= \mathbb{E}\biggl[\frac{1}{M}\sum_{i=1}^N Y_i(1) - \frac{1}{N-M}\sum_{i=1}^N Y_i(0)\biggr]\\
+    &= \frac{1}{N} \sum_{i=1}^N \E\biggl[\frac{W_iY_i(1)}{M/N} - \frac{(1-W_i)Y_i(0)}{(N-M)/N}\biggr]\\
+    &= \frac{1}{N}\sum_{i=1}^N \frac{\E[W_i]Y_i(1)}{M/N} - \frac{(1-\E[W_i])Y_i(0)}{(N-M)/N}\\
+    &= \frac{1}{N}\sum_{i=1}^N \bigl(Y_i(1) - Y_i(0)\bigr) = \tau
+\end{align}
+
+
+\subsection{Variance of the Difference-in-means Estimator}
+
+In this section, we will derive the variance of the difference-in-means estimator under randomizationm and also create confidence intervals for the population average treatment effect.
+\textit{The confidence interval part requires an appeal to the CLT for large sample normality.}
+
+To calculate the variance of the difference-in-means, we need the \textbf{second and cross moments} of the random variable $W_i$:
+
+\begin{align}
+    \E[W_i^2], \quad \E[W_iW_j] 
+\end{align}
+
+where $W_i$ is the treatment indicator for the $i$-th unit.
+
+\begin{itemize}
+    \item Second Moment: $\E[W_i^2] = \Var(W_i) + \E[W_i]^2 = \frac{M}{N}\bigl(1-\frac{M}{N}\bigr) + \left(\frac{M}{N}\right)^2 = \frac{M}{N}$
+    \item Cross Moment: $\E[W_iW_j] = Pr(W_i=1)\cdot Pr(W_j=1|W_i=1) = \frac{M}{N}\cdot\underbrace{\frac{M-1}{N-1}}_\text{fixed M design}$
+\end{itemize}
+
+\subsubsection{True Variance of the Difference-in-means Estimator}
+
+\begin{align}
+    \Var_\mathbf{W}\bigl(\hat\tau | \mathbf{Y(0),Y(1)}\bigr) &= \Var_\mathbf{W}\biggl[\frac{1}{M}\sum_{i=1}^N W_iY_i(1) - \frac{1}{N-M}\sum_{i=1}^N (1-W_i)Y_i(0)| \mathbf{Y(0),Y(1)}\biggr]\\
+    &= \frac{1}{M^2} \Var_\mathbf{W}\biggl[\sum_{i=1}^N W_iY_i(1)| \mathbf{Y(0),Y(1)}\biggr] \notag\\
+    &\quad + \frac{1}{(N-M)^2} \Var_\mathbf{W}\biggl[\sum_{i=1}^N (1-W_i)Y_i(0)| \mathbf{Y(0),Y(1)}\biggr] \notag\\
+    &\quad - \frac{2}{M(N-M)} \mathbf{Cov}_\mathbf{W}\biggl[\sum_{i=1}^N W_iY_i(1), \sum_{i=1}^N (1-W_i)Y_i(0)| \mathbf{Y(0),Y(1)}\biggr]\\
+    &= \frac{N-M}{N}S_1^2 + \frac{M}{N(N-M)}S_0^2 + \frac{1}{N}\bigl(S_0^2 + S_1^2 - S_{01}^2\bigr)\\
+    &= \frac{S_0^2}{N-M} + \frac{S_1^2}{M} - \frac{S_{01}^2}{N}
+\end{align}
+
+where 
+
+\begin{itemize}
+    \item $S_0^2 = \frac{1}{N-1} \sum_{i=1}^N (Y_i(0) - \overline{Y(0)})^2$
+    \item $S_1^2 = \frac{1}{N-1} \sum_{i=1}^N (Y_i(1) - \overline{Y(1)})^2$
+    \item $S_{01}^2 = \frac{1}{N-1} \sum_{i=1}^N (Y_i(1) - Y_i(0) - \tau)^2$
+\end{itemize}
+
+are the population variances of the potential outcomes and the population variance of the unit-level treatment effects.
+The problem here is that $S_{01}^2$ does not have an estimatable counterpart because we cannot obtain the first difference of the potential outcomes for each unit.
+However, if we assume that the treatment effect is additive/constant(i.e., $Y_i(1) = Y_i(0) + \tau$), then $S_{01}^2 = 0$ and the true variance of the difference-in-means estimator is given by:
+
+\begin{align}
+    \Var_\mathbf{W}\bigl(\hat\tau | \mathbf{Y(0),Y(1)}\bigr) = \frac{S_0^2}{N-M} + \frac{S_1^2}{M}
+\end{align}
+
+\subsubsection{Variance Estimator}
+
+Under the assumption of the additive treatment effect, we can use the following variance estimator:
+
+\begin{align}
+    \hat{\Var}_\mathbf{W}\bigl(\hat\tau | \mathbf{Y(0),Y(1)}\bigr) = \frac{s_0^2}{N-M} + \frac{s_1^2}{M}
+\end{align}
+
+where $s_0^2$ and $s_1^2$ are the sample variances of the control and treatment groups, respectively.
+
+This estimator for the variance is widely sued, even when the assumption of an additive treatment effect is inappropriate. 
+There are two reasons for this:
+
+\begin{enumerate}
+    \item Confidence intervals generated using this estimator of the variance will be more \textit{conservative} with actual coverage at least as large as, but not necessarily equal to, the nominal coverage.
+    \item In terms of the superpopulation variance, this estimator is unbiased.
+\end{enumerate}
+
+\subsection{Superpopulation Justification for the Neyman Variance Estimator}
+
+Suppose our sample is a \textbf{random sample} from a \textbf{superpopulation} of $n$ units.
+
+Then, the \textbf{superpopulation average treatment effect} is given by 
+
+\begin{align}
+    \tau^P \equiv \frac{1}{n}\sum_{i=1}^n \bigl(Y_i(1) - Y_i(0)\bigr)
+\end{align}
+
+We also have sampling indicator $R_i=0,1$ for each unit $i$ in the superpopulation, where $N = \sum_{i=1}^n R_i$ is the total number of units in our sample.
+Our \textbf{sample average treatment effect}\footnote{Although formerly referred to as the \textbf{population average treatment effect}} is given by:
+
+\begin{align}
+    \tau^S = \frac{1}{N}\sum_{i=1}^n R_i\cdot\bigl(Y_i(1) - Y_i(0)\bigr)
+\end{align}
+
+Our difference-in-means estimator will be written as
+
+\begin{align}
+    \hat\tau = \frac{1}{M}\sum_{i=1}^N W_iR_iY_i(1) - \frac{1}{N-M}\sum_{i=1}^N (1-W_i)R_iY_i
+\end{align}
+
+Also, let us define the following quantities in table \ref{tab:superpopulation-and-sample-quantities}.
+
+\begin{table}[ht]
+    \centering
+    \label{tab:superpopulation-and-sample-quantities}
+    {\renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{l|cc}
+        \hline
+        & Control & Treatment \\
+        \hline
+        Superpopulation mean & $\overline{Y}({1})^P = \frac{1}{n}\sum_{i=1}^nY_i(1)$ & $\overline{Y}({0})^P = \frac{1}{n}\sum_{i=1}^nY_i(0)$ \\
+        Sample mean & $\overline{Y}({1})^S = \frac{1}{N}\sum_{i=1}^n R_iY_i(1)$ & $\overline{Y}({0})^S = \frac{1}{N}\sum_{i=1}^n R_iY_i(0)$ \\
+        Superpopulation variance & $S_1^{2,P} = \frac{1}{n-1}\sum_{i=1}^n (Y_i(1) - \overline{Y}({1})^P)^2$ & $S_0^{2,P} = \frac{1}{n-1}\sum_{i=1}^n (Y_i(0) - \overline{Y}({0})^P)^2$ \\
+        Sample variance & $S_1^{2,S} = \frac{1}{N-1}\sum_{i=1}^n R_i(Y_i(1) - \overline{Y}({1})^S)^2$ & $S_0^{2,S} = \frac{1}{N-1}\sum_{i=1}^n R_i(Y_i(0) - \overline{Y}({0})^S)^2$ \\ \hline
+        Superpopulation cross-variance & \multicolumn{2}{c}{$S_{01}^{2,P} = \frac{1}{n-1}\sum_{i=1}^n \biggl(Y_i(1) - Y_i(0) - \frac{1}{n}\sum_{i=1}^n \bigl(Y_i(1) - Y_i(0)\bigr)\biggr)^2$} \\
+        Sample cross-variance & \multicolumn{2}{c}{$S_{01}^{2,S} = \frac{1}{N-1}\sum_{i=1}^n R_i\biggl(Y_i(1) - Y_i(0) - \frac{1}{N}\sum_{i=1}^n R_i\cdot\bigl(Y_i(1) - Y_i(0)\bigr)\biggr)^2$} \\
+        \hline
+    \end{tabular}
+    \caption{Superpopulation and Sample Quantities}
+    }
+\end{table}
+
+What we had before was the variance relative to the sample mean $\tau^S$. That is,
+
+\begin{align}
+    \Var^S\bigl(\hat\tau \mid R_1, \dots, R_n\bigr) = \E\biggl[\bigl(\hat\tau - \tau^S\bigr)^2\mid R_1, \dots, R_n\biggr] = \frac{S_0^{2,S}}{N_1} + \frac{S_1^{2,S}}{N_0} - \frac{S_{01}^{2,S}}{N}
+\end{align}
+
+
+First, 
+\begin{itemize}
+    \item $\E[R_i] = \frac{N}{n}$
+    \item $\E[R_i^2] = \frac{N}{n}$
+\end{itemize}
+
+If we take the unconditional expectation of the above equation, we get the following:\footnote{Note that we do still condition on the sample size and the number of units in the treatment and control groups.$(N, N_1, N_0)$.}
+
+\begin{align}
+    \E\bigl[\Var^S\bigl(\hat\tau \mid R_1, \dots, R_n\bigr)\bigr] &= \E\biggl[\frac{S_0^{2,S}}{N_1} + \frac{S_1^{2,S}}{N_0} - \frac{S_{01}^{2,S}}{N}\biggr] \\
+    &= \E\biggl[\frac{\frac{1}{N-1}\sum_{i=1}^n R_i(Y_i(0) - \overline{Y}({0})^S)^2}{N_1}\biggr] + \E\biggl[\frac{\frac{1}{N-1}\sum_{i=1}^n R_i(Y_i(1) - \overline{Y}({1})^S)^2}{N_0}\biggr]\notag \\
+    &\quad - \E\biggl[\frac{\frac{1}{N-1}\sum_{i=1}^n R_i(Y_i(1) - Y_i(0) - \tau^S)^2}{N}\biggr] \\
+    &= \frac{S_0^{2,P}}{N_1} + \frac{S_1^{2,P}}{N_0} - \frac{S_{01}^{2,P}}{N}
+\end{align}
+
+
+Now, let us consider the \textbf{superpopulation variance of the Difference-in-means estimator}:
+
+\begin{align}
+    \Var^P\bigl(\hat\tau\bigr) &= \E\bigl[\bigl(\hat{\tau} - \tau^S + \tau^S - \tau^P\bigr)^2\bigr]\\
+    &= \E\bigl[\bigl(\hat\tau - \tau^S\bigr)^2\bigr] + 2\E\bigl[\bigl(\hat\tau - \tau^S\bigr)\bigl(\tau^S - \tau^P\bigr)\bigr] + \E\bigl[\bigl(\tau^S - \tau^P\bigr)^2\bigr]\\
+    &= \E\biggl[\Var^S\bigl(\hat\tau\bigr)\biggr] + 2\E\bigl[(\tau^S- \tau^P)\E[\tau - \tau^S|\tau^S]\bigr] + \Var^P\bigl(\tau^S\bigr)\\
+    &= \E\biggl[\Var^S\bigl(\hat\tau\bigr)\biggr] + 2\E\bigl[(\tau^S- \tau^P)\cdot 0\bigr] +  \Var^P\bigl(\tau^S\bigr)\\
+    &= \E\biggl[\Var^S\bigl(\hat\tau\bigr)\biggr] +  \Var^P\bigl(\tau^S\bigr)\\
+    &= \E\biggl[\frac{S_0^{2,S}}{N_1} + \frac{S_1^{2,S}}{N_0} - \frac{S_{01}^{2,S}}{N}\biggr] + \underbrace{\E \biggl[\frac{1}{N^2} \sum_{i=1}^N \bigl(Y_i(1) - Y_i(0)-\tau^P\bigr)^2\biggr]}_\text{infinite superpopulation case}\\
+    &= \frac{S_0^{2,P}}{N_1} + \frac{S_1^{2,P}}{N_0} - \frac{S_{01}^{2,P}}{N} + \frac{1}{N^2}\E\biggl[\sum_{i=1}^N \bigl(Y_i(1) - Y_i(0)-\tau^P\bigr)^2\biggr]     \\
+    &= \frac{S_0^{2,P}}{N_1} + \frac{S_1^{2,P}}{N_0} - \frac{S_{01}^{2,P}}{N} + \frac{1}{N^2} \underbrace{\frac{(n-1)N}{(n-1)n}\E\biggl[\sum_{i=1}^n \bigl(Y_i(1) - Y_i(0)-\tau^P\bigr)^2\biggr]}_\text{iid random sampling}\\
+    &= \frac{S_0^{2,P}}{N_1} + \frac{S_1^{2,P}}{N_0} - \frac{S_{01}^{2,P}}{N} + \frac{1}{N} \biggl(1-\frac{1}{n}\biggr)\E\biggl[\frac{1}{n-1}\sum_{i=1}^n \bigl(Y_i(1) - Y_i(0)-\tau^P\bigr)^2\biggr]\\
+    &= \frac{S_0^{2,P}}{N_1} + \frac{S_1^{2,P}}{N_0} - \frac{S_{01}^{2,P}}{N} + \frac{1}{N} \biggl(1-\frac{1}{n}\biggr)S_{01}^{2,P}\\
+    &= \frac{S_0^{2,P}}{N_1} + \frac{S_1^{2,P}}{N_0} -\frac{1}{n}S_{01}^{2,P}\\
+    &\to \frac{S_0^{2,P}}{N_1} + \frac{S_1^{2,P}}{N_0} \quad \text{as } n \to \infty
+\end{align}
+
+\textbf{Sarah}: We're arguing that there is no heterogeneity of the treatment effects at the population level. Also, if we think about infinitely superpopulation, we do not need to use $R_i$ sample indicators, but if we think abut finite superpopulation, we need to use $R_i$ sample indicators.
+
+
+Thus, the Neyman superpopulation variance of the difference-in-means estimator does not have the third term(i.e., the treatment effect variance term), which validates dropping the third term in the Neyman variance estimator.
+
+\subsubsection{Superpopulation Unbiasedness of Difference-in-means Estimator}
+
+Since we know that the difference-in-means estimator is unbiased for the sample ATE, it suffices to show that the sample ATE is unbiased for the superpopulation ATE –
+applying the law of iterated expectations to the difference-in-means estimator gives us the desired result.
+
+\begin{align}
+    \E\bigl[\tau^S\bigr] &= \E\biggl[\frac{1}{N}\sum_{i=1}^N \bigl(Y_i(1) - Y_i(0)\bigr)\biggr]\\
+    &= \frac{1}{N} \sum_{i=1}^N \E\biggl[\bigl(Y_i(1) - Y_i(0)\bigr)\biggr] = \tau^P
+\end{align}
+
+\subsection{Confidence Intervals}
+
+\subsubsection{Aside: Lyapounov Central Limit Theorem}
+
+The Lyapounov Central Limit Theorem (LCLT) is a generalization of the classical Central Limit Theorem that provides conditions under which the normalized sum of independent (but \textbf{not necessarily identically distributed}) random variables converges in distribution to a normal distribution. Specifically, as long as the Lyapounov condition on the moments of the random variables is met, the LCLT guarantees that the sum behaves approximately normal for large samples.
+
+
+
+\begin{theorem}[Lyapounov Central Limit Theorem]
+    Let $X_1, \ldots, X_n$ be a sequence of independent random variables, each with finite first and second moments $\mu_i = \E[X_i]$ and $\sigma_i^2 = \E[(X_i-\mu_i)^2]$, respectively.
+    Define the sum of the variances as $s_n^2 = \sum_{i=1}^n \sigma_i^2$.
+
+    If for some $\delta > 0$(\textbf{Lyapunov condition}),
+    \begin{align}
+        \lim_{n\to\infty} \frac{1}{s_n^{2+\delta}} \sum_{i=1}^n \E\biggl[\lvert X_i - \mu_i\rvert^{2+\delta}\biggr] = 0
+    \end{align}
+    then a central limit theorem holds:
+    \begin{align}
+        \frac{1}{s_n}\sum_{i=1}^n (X_i - \mu_i) \xrightarrow{d} N(0,1)
+    \end{align}
+    as $n\to\infty$.
+
+    The related approximation is:
+    \begin{align}
+        \sum_{i=1}^n X_i \approx N(\sum_{i=1}^n \mu_i, s_n^2)
+    \end{align}
+    as $n\to\infty$.
+\end{theorem}
+
+
+\subsubsection{Confidence Intervals for 50:50 Randomization}
+
+Suppose we have a completely randomized experiment with 50:50 randomization, and define $D_i = 2W_i - 1$ as the recentered and normalized treatment indicator.
+In other words,
+
+\begin{align}
+    \E[D_i] = 0 \quad \text{and} \quad D_i^2 = 1
+\end{align}
+
+From now on, we ignore the random sampling from the superpopulation, but consider the experiment participants the population and $N$ the population size(and thus, $\tau\equiv\tau^S$).
+Then, the difference-in-means estimator can be written as:
+
+\begin{align}
+    \hat\tau &= \tau + \frac{1}{N} \sum_{i=1}^N D_i(Y_i(1) - Y_i(0))\\
+    \sqrt{N}\bigl(\hat\tau - \tau\bigr) &= \frac{1}{\sqrt{N}} \sum_{i=1}^N D_i\bigl(Y_i(1) + Y_i(0)\bigr)
+\end{align}
+
+
+Then, the whole term of $\sqrt{N}\bigl(\hat\tau - \tau\bigr)$ has mean zero and variance $\Var = \frac{1}{N} \sum_{i=1}^N (Y_i(1) + Y_i(0))^2$.
+
+We can construct the confidence interval by applying Lyapunov CLT:
+
+\begin{align}
+    \frac{\sqrt{N}\bigl(\hat\tau - \tau\bigr)}{\sqrt{\frac{1}{N} \sum_{i=1}^N (Y_i(1) + Y_i(0))^2}} \xrightarrow{d} N(0, 1)
+\end{align}
+
+\subsection{Stochastic Estimands}
+
+We can further consider the following estimands:
+
+\begin{itemize}
+    \item \textbf{Average Effect for the Treated}: $\tau_t = \E[Y_i(1) | W_i = 1] = \frac{1}{N_1}\sum_{i=1}^N W_i\bigl(Y_i(1) - Y_i(0)\bigr)$
+    \item \textbf{Average Effect for the Control}: $\tau_c = \E[Y_i(0) | W_i = 0] = \frac{1}{N_0}\sum_{i=1}^N (1-W_i)\bigl(Y_i(1) - Y_i(0)\bigr)$
+\end{itemize}
+
+It has to be noted that these estimands are \textit{stochastic} because they are conditional on the treatment indicator $W_i$.
+However, the difference-in-means estimator is still unbaised for these estimands(i.e., $\E[\hat\tau-\tau_t] = 0$ and $\E[\hat\tau-\tau_c] = 0$).
+
+\subsubsection{Smaller Variance}
+
+\begin{align}
+    \Var(\hat\tau - \tau) &= \E\bigl[\bigl(\hat\tau - \tau_t + \tau_t - \tau\bigr)^2\bigr]\\
+    &=\E\bigl[\hat\tau - \tau_t\bigr]^2 + 2\E\bigl[\bigl(\hat\tau - \tau_t\bigr)\bigl(\tau_t - \tau\bigr)\bigr] + \E\bigl[\bigl(\tau_t - \tau\bigr)^2\bigr]\\
+    &= \E\bigl[\hat\tau - \tau_t\bigr]^2 + \E\bigl[\bigl(\tau_t - \tau\bigr)^2\bigr]
+\end{align}
+
+and thus, we have
+
+\begin{align}
+    \E\bigl[\bigl(\hat\tau - \tau_t\bigr)^2\bigr] < \E\bigl[\bigl(\hat\tau - \tau\bigr)^2\bigr]
+\end{align}
+
+
+\newpage
+\section{Least Squares Estimation in Randomized Experiments}
+
+In the Neyman world, we had the following settings and results:
+
+\begin{itemize}
+    \item setting: completely randomized experiments
+    \item Assumptions: $W_i \perp Y_i(0), Y_i(1)$
+    \item Estimator: $\hat\tau = \overline{Y}_T - \overline{Y}_C$
+    \item True Variance: $\Var \bigl(\hat\tau\bigr) = \frac{1}{N_1}S_1^2 + \frac{1}{N_0}S_0^2 - \frac{1}{N}S_{01}^2$
+    \item Estimated Variance: $\hat{\Var} \bigl(\hat\tau\bigr) = \frac{1}{N_1}s_1^2 + \frac{1}{N_0}s_0^2$
+\end{itemize}
+
+
+In the OLS world, we have the following model, assumptions, and the estimator:
+
+\begin{itemize}
+    \item model: $Y_i = \alpha + \beta W_i + \varepsilon_i$
+    \item assumptions: $W_i \perp \varepsilon_i \quad \varepsilon_i \sim N(0, \sigma^2)$, implying $\E[Y_i|W_i] = \alpha + \beta W_i$
+    \begin{itemize}
+        \item The mean zero assumption for the error term is not restrictive, as we can always center the outcome variable by subtracting the mean of the outcome variable using the constant term $\alpha$.
+        \item The variance assumption is restrictive, as it implies that the error term is homoskedastic; however, we can relax this assumption by allowing heteroskedasticity.
+    \end{itemize}
+    \item estimator: $\hat\beta = \frac{\sum_{i=1}^N (W_i - \overline{W})(Y_i - \overline{Y})}{\sum_{i=1}^N (W_i - \overline{W})^2}$
+\end{itemize}
+
+
+The assumption of $W_i \perp \varepsilon_i$ is more difficult to evaluate directly, as the interpretation of these residuals is rarely made explicit beyond a somewhat vague notion of capturing unobserved factors affecting the outcomes of interest.
+
+Let $\alpha$ be the population average outcome under the control,$\alpha = \mu_0 = \E[Y_i(0)]$.
+Recall that $\tau$ is the super-population average treatment effect, 
+and so we have $\tau = \mu_1 - \mu_0$.
+Now define the residual $\varepsilon_i$ in terms of the population parameters, treatment indicator, and the potential outcomes as
+
+\begin{align}
+    \varepsilon_i &= Y_i(0) - \alpha + W_i\cdot\bigl(Y_i(1) - Y_i(0) - \tau\bigr) \\
+    &=\begin{cases}
+        Y_i^{obs} - \alpha &\quad \text{if} \quad W_i=0,\\
+        Y_i^{obs} - \alpha - \tau &\quad \text{if} \quad W_i=1
+    \end{cases}\\
+    &= Y_i^{obs} - (\alpha +\tau\cdot W_i)
+\end{align}
+
+and thus we have
+
+$$
+Y_i^{obs} = \alpha +\tau\cdot W_i + \varepsilon_i
+$$
+
+\subsection{Unbiasedn
+ess of the Least Squares Estimator}
+
+\begin{align}
+    \E[\hat\beta|W_1, \dots, W_N] &= \E\biggl[\frac{\sum_{i=1}^N (W_i - \overline{W})(Y_i - \overline{Y})}{\sum_{i=1}^N (W_i - \overline{W})^2}\biggm|W_1, \dots, W_N\biggr]\\
+    &= \E\biggl[\frac{\sum_{i=1}^N (W_i - \overline{W})\bigl(Y_i - (\alpha + \beta \overline{W} + \overline{\varepsilon})\bigr)}{\sum_{i=1}^N (W_i - \overline{W})^2}\biggm|W_1, \dots, W_N\biggr]\\
+    &= \E\biggl[\frac{\sum_{i=1}^N (W_i - \overline{W})\bigl(\varepsilon_i - \overline{\varepsilon} + \beta(W_i - \overline{W})\bigr)}{\sum_{i=1}^N (W_i - \overline{W})^2}\biggm|W_1, \dots, W_N\biggr]\\
+    &= \beta + \frac{\frac{1}{N} \sum_{i=1}^N (W_i - \overline{W})\E\bigl[\varepsilon_i - \overline{\varepsilon}| W_1, \dots, W_N\bigr]}{\frac{1}{N} \sum_{i=1}^N (W_i - \overline{W})^2} = \beta \label{eq:unbiasedness_of_least_squares_estimator} 
+\end{align}
+
+Note that the denominotor in equation \eqref{eq:unbiasedness_of_least_squares_estimator} is only defined if $\sum_{i=1}^N W_i \in (0, N)$, and is equal to $\frac{M}{N}\bigl(1-\frac{M}{N}\bigr)$.
+The numerator is $\frac{M}{N}\bigl(1-\frac{M}{N}\bigr)\bigl(\overline{Y}_T - \overline{Y}_C\bigr)$.
+The bottom line is, therefore, $\hat\beta = \overline{Y}_T - \overline{Y}_C = \hat\tau$.
+
+\subsection{Assumptions of each approach}
+
+\subsubsection{Neyman approach}
+\begin{itemize}
+    \item We have a finite population, we only see one of the potential outcomes for each unit.
+    \item The source of randomness is the permutation of the treatment indicator.
+    \item The unbiasedness comes from $\E[\overline{Y}_T - \overline{Y}_C|Y_1(1), Y_1(0), \dots, Y_N(1), Y_N(0)] = \frac{1}{N}\sum_{i=1}^N \bigl(Y_i(1) - Y_i(0)\bigr)$
+\end{itemize}
+
+\subsubsection{LS approach}
+\begin{itemize}
+    \item Model: $Y_i = \alpha + \beta W_i + \varepsilon_i$
+    \item Assumption: $\varepsilon_i \sim N(0, \sigma^2)$ and $\varepsilon_i \perp W_i$
+    \item The unbiasedness comes from the independence: $\E[\hat\beta|W_1, \dots, W_N] = \beta$
+\end{itemize}
+
+Which asumptions are more plausible and how should we judge that plausibility?
+Suppose I want to compare the change in employment in NJ fast food
+restaurants to the change in employment in PA restaurants, as in
+Card and Krueger(1996; AER). What is a good way to think about the two approaches?
+We can analyze the randomized experiment from a \textit{design perspective} as in the Neyman approach;
+or we can also analyze it using the least squares approach, which is based on a \textit{sampling perspective}.
+In practice, these two lead to same/very-similar conditions, but it takes a quite different perspective on the interpretation of the uncertainty.
+Recall that both estimators are the exact same in terms of how they are constructed.
+In the next section, 
+
+
+\subsection{The Variance of the Least Squares Estimator}
+
+The least squares estimator is given by:
+
+\begin{align}
+    \hat\beta = \frac{\sum_{i=1}^N (W_i - \overline{W})(Y_i - \overline{Y})}{\sum_{i=1}^N (W_i - \overline{W})^2} = \beta + \frac{\frac{1}{N} \sum_{i=1}^N (W_i - \overline{W})\varepsilon_i}{\frac{1}{N} \sum_{i=1}^N (W_i - \overline{W})^2}
+\end{align}
+
+This is a linear combination of the error terms, asummed to be iid normal random variables. The distribution of the least squares estimator is given by:
+
+\begin{align}
+    \hat\beta \sim N\left(\beta, \frac{\sigma^2}{N\frac{N_1}{N}\bigl(1-\frac{N_1}{N}\bigr)}\right)
+\end{align}
+
+Therefore, the variance of the least squares estimator is given by:
+
+\begin{align}
+    \Var(\hat\beta) = \frac{\sigma^2}{N\frac{N_1}{N}\bigl(1-\frac{N_1}{N}\bigr)}
+\end{align}
+
+which can be also written as:
+
+\begin{align}
+    \Var(\hat\beta) = \frac{N\sigma^2}{N_1\bigl(N-N_1\bigr)} = \frac{\sigma^2}{N_1} + \frac{\sigma^2}{N-N_1}
+\end{align}
+
+\subsubsection{The Estimated Variance of the Least Squares Estimator}
+
+Given the residuals of $\hat{\varepsilon}_i = Y_i - \hat\alpha - \hat\beta W_i$, we can estimate the variance of the error terms as:
+
+\begin{align}
+    \hat{\sigma}^2 = \frac{1}{N-2}\sum_{i=1}^N \hat{\varepsilon}_i^2
+\end{align}
+
+Therefore, the estimated variance of the least squares estimator is given by:
+
+\begin{align}
+    \hat{\Var}(\hat\beta) &= \frac{\hat{\sigma}^2}{N\frac{N_1}{N}\bigl(1-\frac{N_1}{N}\bigr)} =  \frac{\frac{1}{N-2}\sum_{i=1}^N \hat{\varepsilon}_i^2}{N\frac{N_1}{N}\bigl(1-\frac{N_1}{N}\bigr)}\\
+    &= \frac{\frac{1}{N-2}\sum_{i=1}^N \hat{\varepsilon}_i^2}{N_1} + \frac{\frac{1}{N-2}\sum_{i=1}^N \hat{\varepsilon}_i^2}{N-N_1} 
+\end{align}
+
+\subsection{Comaparison of the variance results in Neyman and OLS}
+
+Now, compare the OLS variance results to the Neyman variance results:
+
+\begin{table}[h]
+    \centering
+    {\renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{lcc}
+        \hline
+        & Neyman & OLS \\
+        \hline
+        Variance & $\frac{1}{N_1}S_1^2 + \frac{1}{N_0}S_0^2 - \frac{1}{N}S_{01}^2$ & $\frac{\sigma^2}{N\frac{N_1}{N}\bigl(1-\frac{N_1}{N}\bigr)}$ \\
+        Estimated Variance & $\frac{1}{N_1}s_1^2 + \frac{1}{N_0}s_0^2$ & $\frac{\hat\sigma^2}{N_1} + \frac{\hat\sigma^2}{N-N_1}$ \\
+        \hline
+    \end{tabular}
+    }
+    \caption{Comparison of the Neyman and OLS variance estimators}
+\end{table}
+
+
+\subsubsection{Why are the true variances different?}
+
+This is because we have a different set of assumptions:
+
+\begin{itemize}
+    \item \textbf{Neyman}: $W_i \perp \{Y_i(0), Y_i(1)\}$
+    \item \textbf{OLS}: $W_i \perp \varepsilon_i$ and $\varepsilon_i \sim N(0, \sigma^2)$, followed by
+    \begin{align*}
+        Y_i = \alpha + \beta W_i + \varepsilon_i
+    \end{align*}
+\end{itemize}
+
+
+
+\subsubsection{Why are the estimated variances different?}
+
+This is because we have a different set of assumptions: (TBU)

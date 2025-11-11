@@ -1,0 +1,48 @@
+\section{More Regression Stuff}
+
+In this section, we consider mainly the following dataset:
+
+\begin{itemize}
+    \item Lalonde Data from \textcite{dehejia1999causal}
+    \item Evaluation of the labor market program in 1968(i.e., treatment date is 1968)
+    \item It has two datasets:
+    \begin{itemize}
+        \item \textbf{Experimental}: randomized treatment assignment to the labor market program(185 T \& 260 C)
+        \item \textbf{Observational(CPS)}: control group from the CPS survey (185 T \& 15,992 C)
+    \end{itemize}
+    \item Outcome Variable: Earnings in 1978(two yrs after the treatment)
+    \item Other Variables:
+    \begin{itemize}
+        \item Program Participation
+        \item Age
+        \item Earnings in 1974/1975
+        \item Children
+        \item Education
+        \item Ethnicity
+        \item etc.
+    \end{itemize}
+\end{itemize}
+
+The main question is \textit{whether the labor market program is effective in increasing the earnings of the participants}.
+
+Consider the following four sets of regressions:
+
+\begin{table}[h]
+    \centering
+    \caption{Regression Models}
+    \label{tab:regression_models}
+    \begin{tabular}{c|c|c|c|c}
+        \hline
+        Outcome & Data & Intercept & Program & R$^2$ \\
+        \hline
+        \multirow{2}{*}{Earnings(1978)} & Experimental & $4.55(0.34)^{***}$ & $1.79(0.67)^{***}$ & $0.02$ \\
+        \cline{2-5}
+        & Observational(CPS) & $14.85(0.08)^{***}$ & $0.68(0.03)^{***}$ & $0.01$ \\
+        \hline
+        \multirow{2}{*}{Unemployment(1975)} & Experimental & $0.68(0.03)^{***}$ & $-0.08(0.05)$ & $0.01$ \\
+        \cline{2-5}
+        & Observational & $0.109(0.003)^{***}$ & $0.49(0.04)^{***}$ & $0.03$ \\
+        \hline
+    \end{tabular}
+\end{table}
+

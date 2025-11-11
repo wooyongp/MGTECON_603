@@ -16,5 +16,87 @@
   {}
 \endgroup
 
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global/global}
+    \entry{bertrand2004emily}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=a25cba6b139b5ccffa7a9dcf8252a692}{%
+           family={Bertrand},
+           familyi={B\bibinitperiod},
+           given={Marianne},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=0ad4a50fedec7f3fb2ce43f3f64e62d6}{%
+           family={Mullainathan},
+           familyi={M\bibinitperiod},
+           given={Sendhil},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {American Economic Association}%
+      }
+      \strng{namehash}{e0fb7650a51dce6981a165911223f00a}
+      \strng{fullhash}{e0fb7650a51dce6981a165911223f00a}
+      \strng{fullhashraw}{e0fb7650a51dce6981a165911223f00a}
+      \strng{bibnamehash}{e0fb7650a51dce6981a165911223f00a}
+      \strng{authorbibnamehash}{e0fb7650a51dce6981a165911223f00a}
+      \strng{authornamehash}{e0fb7650a51dce6981a165911223f00a}
+      \strng{authorfullhash}{e0fb7650a51dce6981a165911223f00a}
+      \strng{authorfullhashraw}{e0fb7650a51dce6981a165911223f00a}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{American economic review}
+      \field{number}{4}
+      \field{title}{Are Emily and Greg more employable than Lakisha and Jamal? A field experiment on labor market discrimination}
+      \field{volume}{94}
+      \field{year}{2004}
+      \field{pages}{991\bibrangedash 1013}
+      \range{pages}{23}
+    \endentry
+    \entry{dehejia1999causal}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=c2c0d665a050ce219aa742ff0d016901}{%
+           family={Dehejia},
+           familyi={D\bibinitperiod},
+           given={Rajeev\bibnamedelima H.},
+           giveni={R\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fcfb7d1de0905e30f32412785828fbdb}{%
+           family={Wahba},
+           familyi={W\bibinitperiod},
+           given={Sadek},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{956f357ca16171a2a49637970026d3aa}
+      \strng{fullhash}{956f357ca16171a2a49637970026d3aa}
+      \strng{fullhashraw}{956f357ca16171a2a49637970026d3aa}
+      \strng{bibnamehash}{956f357ca16171a2a49637970026d3aa}
+      \strng{authorbibnamehash}{956f357ca16171a2a49637970026d3aa}
+      \strng{authornamehash}{956f357ca16171a2a49637970026d3aa}
+      \strng{authorfullhash}{956f357ca16171a2a49637970026d3aa}
+      \strng{authorfullhashraw}{956f357ca16171a2a49637970026d3aa}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of the American Statistical Association}
+      \field{number}{448}
+      \field{title}{Causal Effects in Nonexperimental Studies: Reevaluating the Evaluation of Training Programs}
+      \field{volume}{94}
+      \field{year}{1999}
+      \field{pages}{1053\bibrangedash 1062}
+      \range{pages}{10}
+    \endentry
+  \enddatalist
+\endrefsection
 \endinput
 
