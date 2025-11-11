@@ -198,24 +198,25 @@ rm(highest_leverage_data)
 # Problem 3 ----
 data[, high_leverage := leverage_multivariate > 3*K/n]
 data[, standardized_residuals := l$residuals/sd(l$residuals)]
+data[, abs_standardized_residuals := abs(standardized_residuals)]
 
 ggplot(data, aes(x= standardized_residuals)) + 
   geom_histogram() +
   labs(x="standardized_residuals", y="Count")
 ggsave(file.path(output_path, "histogram_standardized_residuals_problem_3.png"), width=8, height=6)
 
-ggplot(data, aes(x=abs(standardized_residuals), y=leverage_multivariate)) + 
+ggplot(data, aes(x=abs_standardized_residuals, y=leverage_multivariate)) + 
   geom_point() +
   geom_smooth(method = "lm") +
   labs(x="standardized_residuals", y="leverage_multivariate")
 ggsave(file.path(output_path, "scatterplot_standardized_residuals_leverage_multivariate.png"), width=8, height=6)
 
-highest_standardized_residuals <- data[order(standardized_residuals, decreasing = TRUE)][1:5, .(id, standardized_residuals, leverage_multivariate, high_leverage)]
-print(xtable::xtable(highest_standardized_residuals, caption = "Top 5 observations with the highest standardized residuals", label = "tab:highest_standardized_residuals", digits = 4, size = "small"), file = file.path(output_path, "highest_standardized_residuals.tex"))
+highest_standardized_residuals <- data[order(abs_standardized_residuals, decreasing = TRUE)][1:5, .(id, abs_standardized_residuals, leverage_multivariate, high_leverage)]
+print(xtable::xtable(highest_standardized_residuals, caption = "Top 5 observations with the highest absolute standardized residuals", label = "tab:highest_standardized_residuals", digits = 4, size = "small"), file = file.path(output_path, "highest_standardized_residuals.tex"))
 rm(highest_standardized_residuals)
 
-data[order(leverage_multivariate, decreasing = TRUE)][1:5, .(id, standardized_residuals, leverage_multivariate, high_leverage)]
-highest_leverage_multivariate <- data[order(leverage_multivariate, decreasing = TRUE)][1:5, .(id, standardized_residuals, leverage_multivariate, high_leverage)]
+data[order(leverage_multivariate, decreasing = TRUE)][1:5, .(id, abs_standardized_residuals, leverage_multivariate, high_leverage)]
+highest_leverage_multivariate <- data[order(leverage_multivariate, decreasing = TRUE)][1:5, .(id, abs_standardized_residuals, leverage_multivariate, high_leverage)]
 print(xtable::xtable(highest_leverage_multivariate, caption = "Top 5 observations with the highest leverage", label = "tab:highest_leverage_multivariate", digits = 4, size = "small"), file = file.path(output_path, "highest_leverage_multivariate.tex"))
 rm(highest_leverage_multivariate)
 

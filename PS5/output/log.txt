@@ -1,2 +1,2 @@
-RMSE for Problem 4:  7177.183 
-RMSE for Problem 5:  6991.683 
+RMSE for Problem 4:  7176.729 
+RMSE for Problem 5:  6991.621 
