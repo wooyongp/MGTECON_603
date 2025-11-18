@@ -1,13 +1,13 @@
 # Fdb version 4
-["biber wk7-questions-wooyong-park"] 0 "wk7-questions-wooyong-park.bcf" "wk7-questions-wooyong-park.bbl" "wk7-questions-wooyong-park" 1762829189.08991 0
+["biber wk7-questions-wooyong-park"] 0 "wk7-questions-wooyong-park.bcf" "wk7-questions-wooyong-park.bbl" "wk7-questions-wooyong-park" 1762995007.77518 0
   "references.bib" 0 -1 0 ""
   "wk7-questions-wooyong-park.bcf" 0 -1 0 "pdflatex"
   (generated)
   "wk7-questions-wooyong-park.bbl"
   "wk7-questions-wooyong-park.blg"
   (rewritten before read)
-["pdflatex"] 1762829188.06911 "/Users/wooyongpark/Dropbox/01-Coursework/05-GSB/MGTECON_603/questions/wk7-questions-wooyong-park.tex" "wk7-questions-wooyong-park.pdf" "wk7-questions-wooyong-park" 1762829189.09015 0
-  "/Users/wooyongpark/Dropbox/01-Coursework/05-GSB/MGTECON_603/questions/wk7-questions-wooyong-park.tex" 1762829187.89976 5122 396623bc21b27a8bb99979d757465b3f ""
+["pdflatex"] 1762995006.50254 "/Users/wooyongp/Library/CloudStorage/Dropbox/01-Coursework/05-GSB/MGTECON_603/questions/wk7-questions-wooyong-park.tex" "wk7-questions-wooyong-park.pdf" "wk7-questions-wooyong-park" 1762995007.77547 0
+  "/Users/wooyongp/Library/CloudStorage/Dropbox/01-Coursework/05-GSB/MGTECON_603/questions/wk7-questions-wooyong-park.tex" 1762995004.71468 5978 1ab5a5aa80b0f08079255732d6bc5c8f ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
@@ -254,16 +254,17 @@
   "/usr/local/texlive/2025/texmf-dist/tex/latex/xcolor/svgnam.def" 1727642399 4705 34614fec2d4cfd7794c82198c9076871 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/xcolor/xcolor.sty" 1727642399 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "/usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf" 1739380943 42148 61becc7c670cd061bb319c643c27fdd4 ""
-  "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1743911059 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
-  "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1743911045 3345742 df0eedd33858444a11cd7b5484bcd2c7 ""
+  "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1762370101 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
+  "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1741450574 3345740 46b66fdb0378f7bf5921b5eabf1762b8 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "images/wk7-1.png" 1762828384.01275 45405 3a5eec59919b1de39b67b647f3cbd0a7 ""
-  "images/wk7-2.png" 1762828886.59617 47954 4e6fdc4b4f156b0b63c73da2b080a150 ""
-  "wk7-questions-wooyong-park.aux" 1762829188.95374 1164 4dffcfc31feb2a76568070bb88fefa31 "pdflatex"
+  "images/wk7-1.png" 1762828384 45405 3a5eec59919b1de39b67b647f3cbd0a7 ""
+  "images/wk7-2.png" 1762828886 47954 4e6fdc4b4f156b0b63c73da2b080a150 ""
+  "images/wk7-3.png" 1762994832.35734 78788 082daab1e9a58ab7552cc19a18917d9a ""
+  "wk7-questions-wooyong-park.aux" 1762995007.59199 1480 1929ce2fdb18e77ce2b7bf408d923787 "pdflatex"
   "wk7-questions-wooyong-park.bbl" 0 -1 0 "biber wk7-questions-wooyong-park"
-  "wk7-questions-wooyong-park.out" 1762829188.95419 614 c52862218ad0249b7442ceeea97c3fff "pdflatex"
-  "wk7-questions-wooyong-park.run.xml" 1762829188.95538 2465 eb38d5b46cc4cc2d4c0589fd9671a0bb "pdflatex"
-  "wk7-questions-wooyong-park.tex" 1762829187.89976 5122 396623bc21b27a8bb99979d757465b3f ""
+  "wk7-questions-wooyong-park.out" 1762995007.59256 763 fcf59f493dd2cd41e07643188e8bacec "pdflatex"
+  "wk7-questions-wooyong-park.run.xml" 1762995007.59813 2465 eb38d5b46cc4cc2d4c0589fd9671a0bb "pdflatex"
+  "wk7-questions-wooyong-park.tex" 1762995004.71468 5978 1ab5a5aa80b0f08079255732d6bc5c8f ""
   (generated)
   "wk7-questions-wooyong-park.aux"
   "wk7-questions-wooyong-park.bcf"

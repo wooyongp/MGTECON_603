@@ -118,7 +118,27 @@ This question relates to the figure comparing the coefficients of the lasso and 
 \end{figure}
 
 I'm more interested in the shape of the ovals. The oval here looks like it's stretched along the $y=x+k$ line, but Guido drew an oval stretched along the $y=-x+k$ line (sort of stretched from NW to SE) when we have multicollinear variables.
-I wonder how to understand the shape of the ovals. One intuition I had about these figures before was comparing them to the utility curve and the budget constraint in the consumer theory – that way, I could kind of think of the ovals as the indifference curves.
+I wonder how to understand the shape of the ovals. 
+{\color{blue} As an update from Nov 12, I asked this question to Guido, but I didn't fully understand his answer yet. He said that the oval becomes a circle if the covariates are fully independent, 
+but becomes more oval if we have collinearity. 
+But my question is more related to `which' direction the oval would be strectched to.
+}
+
+One intuition I had about these figures before was comparing them to the utility curve and the budget constraint in the consumer theory – that way, I could kind of think of the ovals as the indifference curves.
 I wonder if we can apply a similar intuition and compare the collinear case to the perfect substitute case in consumer theory – we have a flatter tangent of the oval(indifference curve) when we have substitutable variables(goods).
+
+\section{Slides 14 Clustering}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/wk7-3.png}
+    \caption{Clustering}
+    \label{fig:clustering}
+\end{figure}
+
+In the slide above(fig. \ref{fig:clustering}), it assumes that the error term and the covariates are iid distributed.
+Is this a typo? 
+To write the true asymptotic variance in the way it is written down on the slide,
+isn't `independence' sufficient for this case, and the error terms need not have the exact same distribution?
 
 \end{document}

@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.4.6)  18 NOV 2025 10:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  18 NOV 2025 14:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/wooyongpark/Dropbox/01-Coursework/05-GSB/MGTECON_603/PS5/PS5-Wooyong-Park.tex
-(/Users/wooyongpark/Dropbox/01-Coursework/05-GSB/MGTECON_603/PS5/PS5-Wooyong-Park.tex
+**/Users/wooyongp/Library/CloudStorage/Dropbox/01-Coursework/05-GSB/MGTECON_603/PS6/PS6-Wooyong-Park.tex
+(/Users/wooyongp/Library/CloudStorage/Dropbox/01-Coursework/05-GSB/MGTECON_603/PS6/PS6-Wooyong-Park.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
 (/usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls
@@ -305,31 +305,53 @@ Package caption Info: New subtype `subfigure' on input line 238.
 \c@subfigure=\count305
 Package caption Info: New subtype `subtable' on input line 238.
 \c@subtable=\count306
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/algorithms/algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating environment
+\@float@every@algorithm=\toks27
+\c@algorithm=\count307
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+Package: algpseudocode 
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+\c@ALG@line=\count308
+\c@ALG@rem=\count309
+\c@ALG@nested=\count310
+\ALG@tlm=\skip57
+\ALG@thistlm=\skip58
+\c@ALG@Lnr=\count311
+\c@ALG@blocknr=\count312
+\c@ALG@storecount=\count313
+\c@ALG@tmpcounter=\count314
+\ALG@tmplength=\skip59
+)
+Document Style - pseudocode environments for use with the `algorithmicx' style
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count307
+\l__color_backend_stack_int=\count315
 \l__pdf_internal_box=\box57
-) (./PS5-Wooyong-Park.aux)
-\openout1 = `PS5-Wooyong-Park.aux'.
+) (./PS6-Wooyong-Park.aux)
+\openout1 = `PS6-Wooyong-Park.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -367,161 +389,94 @@ LaTeX Font Info:    ... okay on input line 23.
 
 (/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count308
+\scratchcounter=\count316
 \scratchdimen=\dimen186
 \scratchbox=\box58
-\nofMPsegments=\count309
-\nofMParguments=\count310
-\everyMPshowfont=\toks27
-\MPscratchCnt=\count311
+\nofMPsegments=\count317
+\nofMParguments=\count318
+\everyMPshowfont=\toks28
+\MPscratchCnt=\count319
 \MPscratchDim=\dimen187
-\MPnumerator=\count312
-\makeMPintoPDFobject=\count313
-\everyMPtoPDFconversion=\toks28
+\MPnumerator=\count320
+\makeMPintoPDFobject=\count321
+\everyMPtoPDFconversion=\toks29
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring OFF on input line 23.
- (./PS5-Wooyong-Park.out) (./PS5-Wooyong-Park.out)
+Package hyperref Info: Link coloring OFF on input line 25.
+ (./PS6-Wooyong-Park.out) (./PS6-Wooyong-Park.out)
 \@outlinefile=\write3
-\openout3 = `PS5-Wooyong-Park.out'.
+\openout3 = `PS6-Wooyong-Park.out'.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 26.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 28.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 26.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 28.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-<output/scatterplot_re75_re78.png, id=65, 578.16pt x 433.62pt>
-File: output/scatterplot_re75_re78.png Graphic file (type png)
-<use output/scatterplot_re75_re78.png>
-Package pdftex.def Info: output/scatterplot_re75_re78.png  used on input line 42.
-(pdftex.def)             Requested size: 375.80544pt x 281.84966pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-(./output/regression_problem_1.tex)
+) (./output/regression_problem_1_a.tex)
 
 [1
 
-{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./output/highest_leverage_re75.tex)
-<output/scatterplot_re75_leverage_re75.png, id=89, 578.16pt x 433.62pt>
-File: output/scatterplot_re75_leverage_re75.png Graphic file (type png)
-<use output/scatterplot_re75_leverage_re75.png>
-Package pdftex.def Info: output/scatterplot_re75_leverage_re75.png  used on input line 71.
-(pdftex.def)             Requested size: 281.85587pt x 211.39055pt.
+{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 56.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+[2] (./output/se_comparison_d.tex)
 
-(./output/regression_problem_2.tex
-
-[2 <./output/scatterplot_re75_re78.png>]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-)
-
-[3 <./output/scatterplot_re75_leverage_re75.png>] (./output/highest_leverage_re75_re74_education_black_hispanic_age.tex)
-<output/histogram_standardized_residuals_problem_3.png, id=111, 578.16pt x 433.62pt>
-File: output/histogram_standardized_residuals_problem_3.png Graphic file (type png)
-<use output/histogram_standardized_residuals_problem_3.png>
-Package pdftex.def Info: output/histogram_standardized_residuals_problem_3.png  used on input line 113.
-(pdftex.def)             Requested size: 328.82707pt x 246.61679pt.
-
-
-[4] (./output/highest_standardized_residuals.tex)
-
-[5 <./output/histogram_standardized_residuals_problem_3.png>]
-
-[6{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-Overfull \hbox (30.42023pt too wide) in paragraph at lines 174--174
-[]    \OT1/cmtt/m/n/12 predictions <- test_data[, predicted_re78 := predict(l, newdata = test_data)][] 
- []
-
-<output/scatterplot_predicted_re78_error_p4_cv.png, id=140, 578.16pt x 433.62pt>
-File: output/scatterplot_predicted_re78_error_p4_cv.png Graphic file (type png)
-<use output/scatterplot_predicted_re78_error_p4_cv.png>
-Package pdftex.def Info: output/scatterplot_predicted_re78_error_p4_cv.png  used on input line 180.
-(pdftex.def)             Requested size: 375.80544pt x 281.84966pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-
-[7]
-<output/scatterplot_predicted_re78_error_p5_cv.png, id=149, 578.16pt x 433.62pt>
-File: output/scatterplot_predicted_re78_error_p5_cv.png Graphic file (type png)
-<use output/scatterplot_predicted_re78_error_p5_cv.png>
-Package pdftex.def Info: output/scatterplot_predicted_re78_error_p5_cv.png  used on input line 220.
-(pdftex.def)             Requested size: 375.80544pt x 281.84966pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-
-[8 <./output/scatterplot_predicted_re78_error_p4_cv.png>] (./output/summary_stats.tex)
-Overfull \hbox (44.25772pt too wide) in paragraph at lines 2--240
- [][] 
+[3] (./output/regression_problem_1_e.tex)
+Overfull \hbox (22.93736pt too wide) in paragraph at lines 107--108
+[]\OT1/cmr/m/n/12 The OLS stan-dard er-rors for $(\OML/cmm/m/it/12 ; ^^L[]; ^^L[]\OT1/cmr/m/n/12 )$ are $(0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 0186\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 0003\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 0015)$ and $(0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 1579\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 0014\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 0120)$
  []
 
 
+
+[4] (./output/se_comparison_h.tex)
+
+[5]
+
+[6]
+
+[7] (./output/summary_stats.tex)
+
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<output/scatterplot_matrix.png, id=156, 578.16pt x 433.62pt>
-File: output/scatterplot_matrix.png Graphic file (type png)
-<use output/scatterplot_matrix.png>
-Package pdftex.def Info: output/scatterplot_matrix.png  used on input line 246.
-(pdftex.def)             Requested size: 469.75502pt x 352.31538pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<output/correlation_matrix_plot.png, id=157, 578.16pt x 433.62pt>
+<output/correlation_matrix_plot.png, id=125, 578.16pt x 433.62pt>
 File: output/correlation_matrix_plot.png Graphic file (type png)
 <use output/correlation_matrix_plot.png>
-Package pdftex.def Info: output/correlation_matrix_plot.png  used on input line 252.
+Package pdftex.def Info: output/correlation_matrix_plot.png  used on input line 266.
 (pdftex.def)             Requested size: 469.75502pt x 352.31538pt.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
 
+[8 <./output/correlation_matrix_plot.png>]
 
-
-[9 <./output/scatterplot_predicted_re78_error_p5_cv.png>]
-
-[10 <./output/scatterplot_matrix.png>]
-
-[11]
-
-[12 <./output/correlation_matrix_plot.png>] (./PS5-Wooyong-Park.aux)
+[9] (./PS6-Wooyong-Park.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-Package rerunfilecheck Info: File `PS5-Wooyong-Park.out' has not changed.
-(rerunfilecheck)             Checksum: 2D55D243E551B86A022FE537751CCD16;2616.
+Package rerunfilecheck Info: File `PS6-Wooyong-Park.out' has not changed.
+(rerunfilecheck)             Checksum: FA9064B83575F4DF80408DB4BA576B39;948.
  ) 
 Here is how much of TeX's memory you used:
- 12126 strings out of 473190
- 193141 string characters out of 5715801
- 599286 words of memory out of 5000000
- 35168 multiletter control sequences out of 15000+600000
- 570599 words of font info for 81 fonts, out of 8000000 for 9000
+ 12649 strings out of 473190
+ 199483 string characters out of 5715801
+ 605263 words of memory out of 5000000
+ 35674 multiletter control sequences out of 15000+600000
+ 572514 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,12n,79p,552b,595s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on PS5-Wooyong-Park.pdf (12 pages, 2068490 bytes).
+ 75i,13n,79p,396b,476s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on PS6-Wooyong-Park.pdf (9 pages, 314337 bytes).
 PDF statistics:
- 259 PDF objects out of 1000 (max. 8388607)
- 197 compressed objects within 2 object streams
- 48 named destinations out of 1000 (max. 500000)
- 148 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 227 PDF objects out of 1000 (max. 8388607)
+ 176 compressed objects within 2 object streams
+ 52 named destinations out of 1000 (max. 500000)
+ 70 words of extra memory for PDF output out of 10000 (max. 10000000)
 

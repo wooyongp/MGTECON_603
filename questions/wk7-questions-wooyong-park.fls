@@ -1,8 +1,8 @@
-PWD /Users/wooyongpark/Dropbox/01-Coursework/05-GSB/MGTECON_603/questions
+PWD /Users/wooyongp/Library/CloudStorage/Dropbox/01-Coursework/05-GSB/MGTECON_603/questions
 INPUT /usr/local/texlive/2025/texmf.cnf
 INPUT /usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/wooyongpark/Dropbox/01-Coursework/05-GSB/MGTECON_603/questions/wk7-questions-wooyong-park.tex
+INPUT /Users/wooyongp/Library/CloudStorage/Dropbox/01-Coursework/05-GSB/MGTECON_603/questions/wk7-questions-wooyong-park.tex
 OUTPUT wk7-questions-wooyong-park.log
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls
@@ -451,6 +451,11 @@ INPUT ./images/wk7-2.png
 INPUT ./images/wk7-2.png
 INPUT ./images/wk7-2.png
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
+INPUT ./images/wk7-3.png
+INPUT ./images/wk7-3.png
+INPUT ./images/wk7-3.png
+INPUT ./images/wk7-3.png
+INPUT ./images/wk7-3.png
 INPUT wk7-questions-wooyong-park.aux
 INPUT ./wk7-questions-wooyong-park.out
 INPUT ./wk7-questions-wooyong-park.out

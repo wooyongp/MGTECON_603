@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.4.6)  10 NOV 2025 18:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  12 NOV 2025 16:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/wooyongpark/Dropbox/01-Coursework/05-GSB/MGTECON_603/questions/wk7-questions-wooyong-park.tex
-(/Users/wooyongpark/Dropbox/01-Coursework/05-GSB/MGTECON_603/questions/wk7-questions-wooyong-park.tex
+**/Users/wooyongp/Library/CloudStorage/Dropbox/01-Coursework/05-GSB/MGTECON_603/questions/wk7-questions-wooyong-park.tex
+(/Users/wooyongp/Library/CloudStorage/Dropbox/01-Coursework/05-GSB/MGTECON_603/questions/wk7-questions-wooyong-park.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
 (/usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls
@@ -1102,7 +1102,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 79.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<images/wk7-1.png, id=43, 605.26125pt x 451.6875pt>
+<images/wk7-1.png, id=47, 605.26125pt x 451.6875pt>
 File: images/wk7-1.png Graphic file (type png)
 <use images/wk7-1.png>
 Package pdftex.def Info: images/wk7-1.png  used on input line 88.
@@ -1112,37 +1112,45 @@ Package pdftex.def Info: images/wk7-1.png  used on input line 88.
 [1
 
 {/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./images/wk7-1.png>]
-<images/wk7-2.png, id=61, 922.44624pt x 533.995pt>
+<images/wk7-2.png, id=65, 922.44624pt x 533.995pt>
 File: images/wk7-2.png Graphic file (type png)
 <use images/wk7-2.png>
 Package pdftex.def Info: images/wk7-2.png  used on input line 115.
 (pdftex.def)             Requested size: 328.82707pt x 190.35583pt.
 
 
-[2{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./images/wk7-2.png>] (./wk7-questions-wooyong-park.aux)
+[2{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./images/wk7-2.png>]
+<images/wk7-3.png, id=73, 597.23125pt x 454.69875pt>
+File: images/wk7-3.png Graphic file (type png)
+<use images/wk7-3.png>
+Package pdftex.def Info: images/wk7-3.png  used on input line 134.
+(pdftex.def)             Requested size: 328.82707pt x 250.34872pt.
+
+
+[3 <./images/wk7-3.png>] (./wk7-questions-wooyong-park.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `wk7-questions-wooyong-park.out' has not changed.
-(rerunfilecheck)             Checksum: C52862218AD0249B7442CEEEA97C3FFF;614.
+(rerunfilecheck)             Checksum: FCF59F493DD2CD41E07643188E8BACEC;763.
 Package logreq Info: Writing requests to 'wk7-questions-wooyong-park.run.xml'.
 \openout1 = `wk7-questions-wooyong-park.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 45271 strings out of 473190
- 1038084 string characters out of 5715801
- 1977202 words of memory out of 5000000
- 67874 multiletter control sequences out of 15000+600000
+ 45283 strings out of 473190
+ 1038356 string characters out of 5715801
+ 1978244 words of memory out of 5000000
+ 67883 multiletter control sequences out of 15000+600000
  566582 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 93i,7n,113p,817b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 93i,7n,113p,835b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on wk7-questions-wooyong-park.pdf (2 pages, 163353 bytes).
+Output written on wk7-questions-wooyong-park.pdf (3 pages, 205866 bytes).
 PDF statistics:
- 113 PDF objects out of 1000 (max. 8388607)
- 70 compressed objects within 1 object stream
- 8 named destinations out of 1000 (max. 500000)
- 143 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 125 PDF objects out of 1000 (max. 8388607)
+ 79 compressed objects within 1 object stream
+ 11 named destinations out of 1000 (max. 500000)
+ 156 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,0 +1,9 @@
+OLS_b_vector_sd:  0.000337815 
+CRSE_b_vector_sd:  0.001768803 
+Question h: OLS_b_vector_sd:  0.001544397 
+Question h: CRSE_b_vector_sd:  0.01266846 
+Bootstrapped Standard Errors for model with educ and mean_educ:
+          sd_b1       sd_b2   type
+          <num>       <num> <char>
+1: 0.0003514867 0.001505174    OLS
+2: 0.0013753237 0.012282656   CRSE

@@ -1,0 +1,272 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{rotating}
+\usepackage{subcaption}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathbb{V}}
+
+\title{MGTECON 603 - Problem Set 6\\ \small{(Instructor: Guido Imbens)}}
+\author{Wooyong Park\\ {\small Collaborators: Cem Kozanoglu, Roberto Gonzalez Tellez, Hanniel Ho, Aileen Wu}}
+\date{\today}
+
+
+\begin{document}
+
+\maketitle
+
+\section*{0 Summary Statistics}
+
+The summary statistics of the data are shown in table \ref{tab:summary_stats} in the appendix.
+Also, the scatterplot and the correlation matrix of the data are shown in figure \ref{fig:correlation_matrix_plot} in the appendix.
+
+\section{Problem 1}
+\subsection{Part (a)-(c)}
+
+I estimate the OLS model with the following formula using two different standard error estimators: homoskedastic and cluster-robust.
+\begin{equation}
+    Y_i = \alpha + \beta X_i + \epsilon_i
+\end{equation}
+
+The results are shown in table \ref{tab:regression_problem_1_a}, where the first column(1) is the homoskedastic standard error estimator and the second column(2) is the cluster-robust standard error estimator.
+
+\input{output/regression_problem_1_a.tex}
+
+The OLS standard errors for $(\alpha, \beta)$ are $(0.0045, 0.0003)$ and $(0.0307, 0.0018)$ for the homoskedastic and cluster-robust standard error(CRSE) estimators, respectively.
+
+\newpage
+
+\subsection{Part (d)}
+I calculate the homoskedastic and cluster-robust standard errors by bootstrapping.
+In the case of homoskedastic OLS, I used the parametric bootstrap method, since it directly assumes the homoskedasticity of the error term.
+I followed the following algorithms:
+
+\begin{algorithm}[H]
+    \caption{Parametric Bootstrap for OLS Standard Errors}
+    \label{alg:parametric_bootstrap}
+    \begin{algorithmic}[1]
+        \State Estimate the initial OLS model $lwage_i = \beta_0 + \beta_1 educ_i + \epsilon_i$ to obtain coefficients $\hat{\beta}_0$, $\hat{\beta}_1$ and residuals $\{\hat{\epsilon}_i\}_{i=1}^n$.
+        \For{$b = 1$ to $B$}
+            \State Create a bootstrap sample of residuals $\{\epsilon_i^{*b}\}_{i=1}^n$ by sampling with replacement from the original residuals $\{\hat{\epsilon}_i\}_{i=1}^n$.
+            \State Generate a new outcome variable $lwage_i^{*b} = \hat{\beta}_0 + \hat{\beta}_1 educ_i + \epsilon_i^{*b}$ for $i=1, \dots, n$.
+            \State Re-estimate the OLS model of $lwage^{*b}$ on $educ$ to get the coefficient estimate $\hat{\beta}_1^{*b}$.
+            \State Store $\hat{\beta}_1^{*b}$.
+        \EndFor
+        \State The bootstrapped standard error is the standard deviation of the stored coefficients: $SE(\hat{\beta}_1) = \sqrt{\frac{1}{B-1}\sum_{b=1}^B (\hat{\beta}_1^{*b} - \bar{\beta}_1^*)^2}$.
+    \end{algorithmic}
+\end{algorithm}
+
+For cluster-robust standard errors, I use a two-stage cluster bootstrap:
+\begin{algorithm}[H]
+    \caption{Cluster-Robust Bootstrap (Two-Stage Resampling)}
+    \label{alg:cluster_bootstrap}
+    \begin{algorithmic}[1]
+        \State Identify the $M$ unique clusters (states of birth) in the data.
+        \For{$b = 1$ to $B$}
+            \State Create a bootstrap sample of $M$ cluster IDs, $\{c_1^{*b}, \dots, c_M^{*b}\}$, by sampling with replacement from the original cluster IDs.
+            \State Initialize an empty bootstrap dataset, \texttt{data\_b}.
+            \For{each sampled cluster ID $c_j^{*b}$ in the list}
+                \State Let the original data for this cluster be \texttt{data\_c}.
+                \State Create a bootstrap sample of individuals from this cluster by sampling $|\text{\texttt{data\_c}}|$ rows with replacement from \texttt{data\_c}.
+                \State Append these resampled individuals to \texttt{data\_b}.
+            \EndFor
+            \State Re-estimate the OLS model of $lwage$ on $educ$ using the bootstrap dataset \texttt{data\_b} to get the coefficient estimate $\hat{\beta}_1^{*b}$.
+            \State Store $\hat{\beta}_1^{*b}$.
+        \EndFor
+        \State The cluster-robust bootstrapped standard error is the standard deviation of the stored coefficients: $SE_{cluster}(\hat{\beta}_1) = \sqrt{\frac{1}{B-1}\sum_{b=1}^B (\hat{\beta}_1^{*b} - \bar{\beta}_1^*)^2}$.
+    \end{algorithmic}
+\end{algorithm}
+
+The results are shown in table \ref{tab:se_comparison_d}.
+
+\input{output/se_comparison_d.tex}
+
+\newpage
+
+\subsection{Part (e)-(g)}
+I estimate the OLS model with the following formula:
+\begin{equation}
+    Y_i = \alpha + \beta_1 X_i + \beta_2 \overline{X}_c + \epsilon_i
+\end{equation}
+
+The results are shown in table \ref{tab:regression_problem_1_e}, where the first column(1) is the OLS standard error estimator and the second column(2) is the cluster-robust standard error estimator.
+
+\input{output/regression_problem_1_e.tex}
+
+The OLS standard errors for $(\alpha, \beta_1, \beta_2)$ are $(0.0186, 0.0003, 0.0015)$ and $(0.1579, 0.0014, 0.0120)$ for the homoskedastic and cluster-robust standard error(CRSE) estimators, respectively.
+
+\newpage
+
+\subsection{Part (h)}
+I calculate the homoskedastic and cluster-robust standard errors by bootstrapping.
+In the case of homoskedastic OLS, I used the parametric bootstrap method, since it directly assumes the homoskedasticity of the error term.
+I followed the same algorithm as in part (d); the only difference is that I now have two coefficients to estimate: $\beta_1$ and $\beta_2$.
+
+The results are shown in table \ref{tab:se_comparison_h}.
+\input{output/se_comparison_h.tex}
+
+
+\subsection{Summary of Results}
+The results from the previous sections are summarized in tables \ref{tab:summary_model_1} and \ref{tab:summary_model_2}.
+
+\begin{table}[H]
+    \centering
+    \caption{Summary of Standard Errors for Model 1: $lwage \sim educ$}
+    \label{tab:summary_model_1}
+    \begin{tabular}{lcc}
+        \toprule
+        Standard Error Type & Analytic & Bootstrap \\
+        \midrule
+        Homoskedastic (OLS) & 0.0003 & 0.0003 \\
+        Cluster-Robust (CRSE) & 0.0018 & 0.0018 \\
+        \bottomrule
+    \end{tabular}
+    \begin{minipage}{\linewidth}
+    \footnotesize
+    \textit{Notes:} The coefficient for `educ` is 0.0708. The analytic SEs are from the `fixest::feols` output. The bootstrap SEs are the standard deviation of the bootstrap distribution from 10,000 replications.
+    \end{minipage}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Summary of Standard Errors for Model 2: $lwage \sim educ + mean\_educ$}
+    \label{tab:summary_model_2}
+    \begin{tabular}{lcccc}
+        \toprule
+        & \multicolumn{2}{c}{Analytic} & \multicolumn{2}{c}{Bootstrap} \\
+        \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+        Coefficient & Homoskedastic & Cluster-Robust & Homoskedastic & Cluster-Robust \\
+        \midrule
+        educ (0.0671) & 0.0003 & 0.0014 & 0.0004 & 0.0014 \\
+        mean\_educ (0.0696) & 0.0015 & 0.0120 & 0.0015 & 0.0123 \\
+        \bottomrule
+    \end{tabular}
+    \begin{minipage}{\linewidth}
+    \footnotesize
+    \textit{Notes:} The analytic SEs are from the `fixest::feols` output. The bootstrap SEs are the standard deviation of the bootstrap distribution from 10,000 replications.
+    \end{minipage}
+\end{table}
+
+\section{Problem 2}
+Let the model be
+\begin{equation}
+    Y_{ic} = \alpha + \boldsymbol{\beta}'\mathbf{X}_{ic} + \eta_c + \nu_{ic}
+\end{equation}
+where the composite error term is 
+\begin{equation}
+    v_{ic} = \eta_c + \nu_{ic}
+\end{equation}
+The full variance-covariance matrix of the errors is block-diagonal, where $\mathbf{I}_C$ is the identity matrix of size $C$ and $\boldsymbol{\Omega}_c$ is the covariance matrix for a single cluster $c$ (size $N_c$):
+\begin{equation}
+    \mathbf{\Omega} = \mathbf{I}_C \otimes \boldsymbol{\Omega}_c
+\end{equation}
+
+We can write the covariance matrix for a single cluster $c$ as:
+\begin{equation}
+    \boldsymbol{\Omega}_c = \text{Var}(\mathbf{v}_c) = \sigma_\nu^2 \mathbf{I}_{N_c} + \sigma_\eta^2 \mathbf{J}_{N_c}
+\end{equation}
+
+
+The GLS estimator can be written as follows:
+
+\begin{align}
+    \hat{\boldsymbol{\beta}}_{GLS} &= \arg\min_{\boldsymbol{\beta}} \bigl(\mathbf{Y}-\mathbf{X}\boldsymbol{\beta}\bigr)' \mathbf{\Omega}^{-1} \bigl(\mathbf{Y}-\mathbf{X}\boldsymbol{\beta}\bigr)\\
+    &= (\mathbf{X}' \mathbf{\Omega}^{-1} \mathbf{X})^{-1} (\mathbf{X}' \mathbf{\Omega}^{-1} \mathbf{Y})
+\end{align}
+
+Then, we can think of the GLS estimator as the OLS estimator of the transformed variables:
+\begin{align}
+    \mathbf{X}^* &= \mathbf{P} \mathbf{X} = \mathbf{\Omega}^{-1/2} \mathbf{X}
+\end{align}
+
+The transformation for observations within cluster $c$ is equivalent to some sort of demeaning process:
+
+\begin{equation}
+    \mathbf{X}_{ic}^* = \mathbf{X}_{ic} - \lambda_c \overline{\mathbf{X}}_c
+\end{equation}
+
+where $\overline{\mathbf{X}}_c$ is the cluster mean of $\mathbf{X}$, and $\lambda_c$ is the quasi-demeaning factor:
+\begin{equation}
+    \lambda_c = 1 - \frac{\sigma_\nu}{\sqrt{\sigma_\nu^2 + N_c \sigma_\eta^2}}
+\end{equation}
+
+Since the regressor is constant within the cluster, we have:
+\begin{equation}
+    \mathbf{X}_{ic} = \mathbf{X}_c \quad \text{for all } i
+\end{equation}
+
+This implies that the cluster mean of the regressor is simply the regressor itself:
+\begin{equation}
+    \overline{\mathbf{X}}_c = \frac{1}{N_c} \sum_{i=1}^{N_c} \mathbf{X}_{ic} = \mathbf{X}_c
+\end{equation}
+
+Substituting this into the transformation for $\mathbf{X}_{ic}^*$:
+\begin{align}
+    \mathbf{X}_{ic}^* &= \mathbf{X}_c - \lambda_c \mathbf{X}_c \\
+    \mathbf{X}_{ic}^* &= (1 - \lambda_c) \mathbf{X}_c
+\end{align}
+Since $\mathbf{X}_{ic}^*$ is proportional to $\mathbf{X}_c$, the transformed regressor matrix $\mathbf{X}^{*}$ is proportional to the original regressor matrix $\mathbf{X}$:
+\begin{equation}
+    \mathbf{X}^{*} = (1 - \lambda) \mathbf{X}
+\end{equation}
+where $\lambda$ is constant across clusters (since $N_c$ is constant across clusters, $N_c = N/C$).
+The GLS estimator is the OLS estimator of the transformed model $\mathbf{Y}^* = \mathbf{X}^* \boldsymbol{\beta} + \mathbf{v}^*$:
+\begin{equation}
+    \hat{\boldsymbol{\beta}}_{GLS} = (\mathbf{X}^{*'} \mathbf{X}^{*})^{-1} (\mathbf{X}^{*'} \mathbf{Y}^{*})
+\end{equation}
+
+Substitute the proportional relationships ($\mathbf{X}^* = (1-\lambda) \mathbf{X}$ and $\mathbf{Y}^* = (1-\lambda) \mathbf{Y}$):
+\begin{align}
+    \hat{\boldsymbol{\beta}}_{GLS} &= \bigl( ((1-\lambda) \mathbf{X})' ((1-\lambda) \mathbf{X}) \bigr)^{-1} \bigl( ((1-\lambda) \mathbf{X})' ((1-\lambda) \mathbf{Y}) \bigr) \\
+    &= \bigl( (1-\lambda)^2 \mathbf{X}' \mathbf{X} \bigr)^{-1} \bigl( (1-\lambda)^2 \mathbf{X}' \mathbf{Y} \bigr) \\
+    &= \frac{1}{(1-\lambda)^2} (\mathbf{X}' \mathbf{X})^{-1} (1-\lambda)^2 (\mathbf{X}' \mathbf{Y}) \\
+    &= (\mathbf{X}' \mathbf{X})^{-1} (\mathbf{X}' \mathbf{Y}) = \hat{\boldsymbol{\beta}}_{OLS}
+\end{align}
+
+The estimators are algebraically identical
+\begin{equation}
+    \hat{\boldsymbol{\beta}}_{GLS} = \hat{\boldsymbol{\beta}}_{OLS}
+\end{equation}
+which implies that their variances are also equal:
+\begin{equation}
+    \text{Var}(\hat{\boldsymbol{\beta}}_{GLS}) = \text{Var}(\hat{\boldsymbol{\beta}}_{OLS})
+\end{equation}
+
+\newpage
+
+\appendix
+\setcounter{figure}{0}                      
+\setcounter{table}{0}                      
+\renewcommand\thefigure{A.\arabic{figure}} 
+\renewcommand\thetable{A.\arabic{table}} 
+
+
+\section{Summary Statistics}
+\begin{sidewaystable}[h]
+    \centering
+    \tiny
+    \input{output/summary_stats.tex}
+    \caption{\label{tab:summary_stats}Summary Statistics}
+\end{sidewaystable}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{output/correlation_matrix_plot.png}
+    \caption{\label{fig:correlation_matrix_plot}Correlation Matrix Plot}
+\end{figure}
+
+
+
+\end{document}
